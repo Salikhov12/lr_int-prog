@@ -1,3 +1,6 @@
+<head>
+<title>Салихов Рашит</title>
+</head>
 <p> Дата и время:
 <p>
 <?php
@@ -6,12 +9,12 @@
 ?>
 
 <ul>
-<li><a href="lab-1-1.php">1</a>
-<li><a href="lab-1-2.php">2</a>
-<li><a href="lab-1-3.php">3</a>
-<li><a href="index.php">4</a>
+<li><a href="lab-1-1.php">2</a>
+<li><a href="lab-1-2.php">3</a>
+<li><a href="lab-1-3.php">4</a>
+<li><a href="index.php">5</a>
 <ul>
-<li><a href="lab-1-5.php">5</a>
+<li><a href="lab-1-5.php">1</a>
 </ul>
 <li><a href="lab-2-1.php">6</a>
 <li><a href="lab-2-2.php">7</a>
@@ -23,7 +26,8 @@
 <li><a href="lab-2-8.php">13</a>
 <li><a href="lab-2-9.php">14</a>
 <ul>
-<li><a href="lab-2-10.php">15</a>
+<li><a href="lab-2-10.php">2</a>
+<li><a href="lab-2-10.php">3</a>
 </ul>
 
 </ul>
