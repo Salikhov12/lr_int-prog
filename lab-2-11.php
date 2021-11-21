@@ -18,7 +18,7 @@ $result = 0;
 print("<br><br>Вариант 6.<br>");
 for ($i=$N;$i<=$M;$i++){
 	$sqr = pow($i,(1.0/3)); #Корень числа третьей степени, для уменьшения количества переборов
-	settype($sqr,int);
+	settype($sqr,"int");
 	for ($j=1;$j<=$sqr;$j++){
 		for ($k=$j;$k<=$sqr;$k++){
 			if ( (pow($j,3) + pow($k,3)) == $i){
