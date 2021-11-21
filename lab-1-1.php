@@ -1,3 +1,6 @@
+<head>
+<title>Салихов Рашит</title>
+</head>
 <?php
 	$var1= '3';
 	$var2 = 5;

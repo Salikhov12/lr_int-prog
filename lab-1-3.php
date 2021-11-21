@@ -1,3 +1,6 @@
+<head>
+<title>Салихов Рашит</title>
+</head>
 Число e равно <?php 
 define('NUM_E',2.71828);
 $num_e1 = NUM_E;
