@@ -27,7 +27,7 @@
 <li><a href="lab-2-9.php">14</a>
 <ul>
 <li><a href="lab-2-10.php">2</a>
-<li><a href="lab-2-10.php">3</a>
+<li><a href="lab-2-11.php">3</a>
 </ul>
 
 </ul>
