@@ -5,7 +5,7 @@ function fUsl3(){
 	экран.<br>");
 }
 function fUsl6(){
-	print("Вариант 6.<br>Дана квадратная матрица порядка N. Для каждого столбца матрицы найти наименьший
+	print("<br>Вариант 6.<br>Дана квадратная матрица порядка N. Для каждого столбца матрицы найти наименьший
 	элемент. Вычислить и напечатать произведение найденных наименьших элементов.<br>");
 }
 function fZapAr($n,$m){
@@ -39,7 +39,17 @@ function fObv3($arr,$n,$m){
 	}
 	return $arr;
 }
-function fObv6(){
-	
+function fObv6($arr,$n,$m){
+	$result = 1;
+	for ($i=0;$i<$n;$i++){
+		$min = 101;
+		for ($j=0;$j<$m;$j++){
+			if ($arr[$j][$i]<$min){
+				$min = $arr[$j][$i];
+			}
+		}
+		$result*=$min;
+	}
+	print($result);
 }
 ?>
