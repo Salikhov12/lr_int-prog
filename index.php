@@ -7,8 +7,10 @@
  	$d=date("d.m.Y H:i");
  	echo($d);
 ?>
+<br>
 
 <ul>
+Лабораторная работа №1
 <li><a href="lab-1-1.php">2</a>
 <li><a href="lab-1-2.php">3</a>
 <li><a href="lab-1-3.php">4</a>
@@ -29,5 +31,11 @@
 <li><a href="lab-2-10.php">2</a>
 <li><a href="lab-2-11.php">3</a>
 </ul>
-
+Лабораторная работа №2
+<li><a href="lab2-1.php">1</a>
+<li><a href="lab2-2.php">2</a>
+<li><a href="lab2-3.php">3</a>
+<li><a href="lab2-4.php">4</a>
+<li><a href="lab2-5.php">5</a>
+<li><a href="lab2-6.php">6</a>
 </ul>
