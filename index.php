@@ -46,7 +46,7 @@
 <li><a href="f6.html">6</a>
 <li><a href="f7.php">7</a>
 <ul>
-<li><a href="s3-1.php">1</a>
+<li><a href="s3-1.html">1</a>
 <li><a href="s3-2.php">2</a>
 <li><a href="s3-3.php">3</a>
 <li><a href="s3-4.php">4</a>
