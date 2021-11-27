@@ -51,6 +51,6 @@
 <li><a href="s3-3.php">3</a>
 <li><a href="s3-4.php">4</a>
 <li><a href="s3-5.php">5</a>
-<li><a href="s3-6.php">6</a>
+<li><a href="s3-6.html">6</a>
 </ul>
 </ul>
