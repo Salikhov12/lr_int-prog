@@ -38,10 +38,10 @@ function vr19($s){
 	$v=0;
 	$n=0;
 	for ($i=0;$i<strlen($s);$i++){
-		if (ctype_upper($s{$i})){
+		if (ctype_upper(substr($s,$i,1))){
 			$v++;
 		}
-		if (ctype_lower($s{$i})){
+		if (ctype_lower((substr($s,$i,1)))){
 			$n++;
 		}
 	}
