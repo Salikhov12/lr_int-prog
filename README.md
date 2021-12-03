@@ -1,1 +1,1 @@
-[Сайт на Heroku](https://salikhov-lr-int-prog.herokuapp.com/index.php)
+[Сайт](http://a0605962.xsph.ru/)
