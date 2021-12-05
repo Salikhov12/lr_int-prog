@@ -5,7 +5,7 @@
 <body>
 <?php
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$link = mysqli_connect("localhost", "username","password") or die ("Невозможно
+$link = mysqli_connect("localhost","username","password") or die ("Невозможно
 подключиться к серверу"); // установление соединения с сервером
  mysqli_query($link,'SET NAMES UTF8'); // тип кодировки
  // подключение к базе данных:
@@ -32,10 +32,10 @@ print "<br>Издатель: <input name='publisher' size='30' type='text'
 value='".$publisher."' required>";
 print "<br>Объем продаж: <input name='sales' value='".$sales."' type='number'>";
 print "<input type='hidden' name='game_id' value='".$game_id."'> <br>";
-print "<input type='submit' name='' value='Сохранить'>";
+print "<input type='submit' name='' value='Сохранить'><input type='hidden' name='type' value=game>";
+
 print "</form>";
-print "<p><a href=\"index.php\"> Вернуться к списку
-игр </a>";
+print "<p><a href=\"index.php\"> Вернуться к спискам </a>";
 ?>
 </body>
 </html>

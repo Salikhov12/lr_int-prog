@@ -3,7 +3,7 @@
 <body>
 <?php
  mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$link = mysqli_connect("localhost", "username","password") or die ("Невозможно
+$link = mysqli_connect("localhost","username","password") or die ("Невозможно
 подключиться к серверу"); // установление соединения с сервером
  mysqli_query($link,'SET NAMES UTF8'); // тип кодировки
  // подключение к базе данных:
@@ -48,7 +48,7 @@ while ($row=mysqli_fetch_array($result)){// для каждой строки и�
  echo "<tr>";
  echo "<td>" . $row['store_name'] . "</td>";
  echo "<td>" . $row['url'] . "</td>";
- echo "<td><a href='edit.php?store_id=" . $row['store_id']
+ echo "<td><a href='edit_store.php?store_id=" . $row['store_id']
 . "'>Редактировать</a></td>"; // запуск скрипта для редактирования
  echo "<td><a href='delete.php?id=" . $row['store_id']
 . "&table=store&ni=store_'>Удалить</a></td>"; // запуск скрипта для удаления записи
@@ -79,7 +79,7 @@ while ($row=mysqli_fetch_array($result)){// для каждой строки и�
  echo "<td>" . $row['store_name'] . "</td>";
  echo "<td>" . $row['price'] . "</td>";
  echo "<td>" . $row['game_key'] . "</td>";
- echo "<td><a href='edit.php?key_id=" . $row['key_id']
+ echo "<td><a href='edit_key.php?key_id=" . $row['key_id']
 . "'>Редактировать</a></td>"; // запуск скрипта для редактирования
  echo "<td><a href='delete.php?id=" . $row['key_id']
 . "&table=`keys`&ni=key_'>Удалить</a></td>"; // запуск скрипта для удаления записи
@@ -89,5 +89,7 @@ print "</table>";
 $num_rows = mysqli_num_rows($result); // число записей в таблице БД
 print("<P>Всего ключей: $num_rows </p>");
 ?>
-<p> <a href="new_key.php"> Добавить ключ </a>
+<p> <a href="new_key.php"> Добавить ключ </a><br>
+<a href="gen_pdf.php"> Скачать PDF </a><br><a href="gen_xls.php"> Скачать XML </a><br>
+<a href="../index.php"> Назад </a>
 </body> </html>

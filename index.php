@@ -54,5 +54,5 @@
 <li><a href="s3-6.html">6</a>
 </ul>
 Лабораторная работа №4
-<li><a href="bd_games/index.php">1</a>
+<li><a href="bd_games/index.php">База данных</a>
 </ul>

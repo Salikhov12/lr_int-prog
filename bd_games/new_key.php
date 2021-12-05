@@ -2,7 +2,7 @@
 <head> <title> Добавление нового ключа </title> </head>
 <body>
 <?php
-$link = mysqli_connect("localhost", "username","password") or die ("Невозможно
+$link = mysqli_connect("localhost","username","password") or die ("Невозможно
 подключиться к серверу"); // установление соединения с сервером
  mysqli_query($link,'SET NAMES UTF8'); // тип кодировки
  // подключение к базе данных:
@@ -20,7 +20,7 @@ echo "<input type='date' name='date_buy' max='" . date("Y-m-d") . "' required>";
 echo "<input type='date' name='date_exp' min='" . date("Y-m-d") . "' required>";
 ?>
 <!--<input name="date_exp" type="date" required>-->
-<br>ID игры:
+<br>Название игры:
 <?php 
 $sql = "SELECT game_id,name FROM games";
 $result_select = mysqli_query($link,$sql);
@@ -30,7 +30,7 @@ echo "<option value = '".$object['game_id']."' >". $object['name'] ."</option>";
 }
 echo "</select>";
 ?>
-<br>ID магазина:
+<br>Название магазина:
 <?php 
 $sql = "SELECT store_id,store_name FROM store";
 $result_select = mysqli_query($link,$sql);
