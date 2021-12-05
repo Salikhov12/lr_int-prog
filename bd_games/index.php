@@ -23,9 +23,9 @@ while ($row=mysqli_fetch_array($result)){// для каждой строки и�
  echo "<td>" . $row['developer'] . "</td>";
  echo "<td>" . $row['publisher'] . "</td>";
  echo "<td>" . $row['sales'] . "</td>";
- echo "<td><a href='edit.php?id=" . $row['game_id']
+ echo "<td><a href='edit.php?game_id=" . $row['game_id']
 . "'>Редактировать</a></td>"; // запуск скрипта для редактирования
- echo "<td><a href='delete.php?id=" . $row['game_id']
+ echo "<td><a href='delete.php?game_id=" . $row['game_id']
 . "'>Удалить</a></td>"; // запуск скрипта для удаления записи
  echo "</tr>";
 }
@@ -33,5 +33,5 @@ print "</table>";
 $num_rows = mysqli_num_rows($result); // число записей в таблице БД
 print("<P>Всего игр: $num_rows </p>");
 ?>
-<p> <a href="new.html"> Добавить игру </a>
+<p> <a href="new.php"> Добавить игру </a>
 </body> </html>
