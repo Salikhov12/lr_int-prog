@@ -8,9 +8,9 @@
 <br>Разработчик: <input name="developer" size="30" type="text" required>
 <br>Издатель: <input name="publisher" size="30" type="text" required>
 <br>Объем продаж: <input name="sales" type="number" >
-</textarea>
 <p><input name="add" type="submit" value="Добавить">
 <input name="b2" type="reset" value="Очистить"></p>
+<input type='hidden' name='type' value=игру>
 </form>
 <p>
 <a href="index.php"> Вернуться к списку игр </a>
