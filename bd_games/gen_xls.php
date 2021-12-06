@@ -5,10 +5,10 @@ $link = mysqli_connect("localhost","username","password") or die ("Невозм�
  mysqli_query($link,'SET NAMES UTF8'); // тип кодировки
  // подключение к базе данных:
  mysqli_select_db($link,"db_name") or die("Нет такой таблицы!");
- $result=mysqli_query($link,"select  name, genre, 
- developer, publisher, game_key, date_buy, date_exp, 
- url from games NATURAL JOIN `keys` natural JOIN store
-order by game_id");
+ $result=mysqli_query($link,"select name, genre, developer, publisher,
+ game_key, date_buy, date_exp, url from games left outer JOIN `keys` on games.game_id=`keys`.`game_id`
+ left outer JOIN store on `keys`.`store_id`=store.store_id
+order by games.game_id");
 $header= array("№ п/п","Название","Жанр","Разработчик","Издатель","Цифровой ключ","Дата приобретения",
 "Дата окончания","URL магазина");
 
