@@ -5,7 +5,7 @@
 <body>
 <?php
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$link = mysqli_connect("localhost","username","password") or die ("Невозможно
+$link = mysqli_connect("localhost", "username","password") or die ("Невозможно
 подключиться к серверу"); // установление соединения с сервером
  mysqli_query($link,'SET NAMES UTF8'); // тип кодировки
  // подключение к базе данных:
@@ -32,14 +32,23 @@ $sql = "SELECT game_id,name FROM games";
 $result_select = mysqli_query($link,$sql);
 echo "<br>Название игры:<select name = 'game_id'>";
 while($object = mysqli_fetch_array($result_select,MYSQLI_ASSOC)){
-echo "<option value = '".$object['game_id']."' >". $object['name'] ."</option>";
+    if ($object['game_id']==$game_id){
+        echo "<option value = '".$object['game_id']."' selected>". $object['name'] ."</option>";
+    }
+    else
+{echo "<option value = '".$object['game_id']."' >". $object['name'] ."</option>";}
 }
 echo "</select>";
 $sql = "SELECT store_id,store_name FROM store";
 $result_select = mysqli_query($link,$sql);
 echo "<br>Название магазина<select name = 'store_id'>";
 while($object = mysqli_fetch_array($result_select,MYSQLI_ASSOC)){
-echo "<option value = '".$object['store_id']."' >". $object['store_name'] ."</option>";
+     if ($object['store_id']==$store_id){
+        echo "<option value = '".$object['store_id']."' selected>". $object['store_name'] ."</option>";
+    }
+    else
+{
+echo "<option value = '".$object['store_id']."' >". $object['store_name'] ."</option>";}
 }
 echo "</select>";
 print "<br>Стоимость: <input name='price' type='number' required value='".$price."'>";
