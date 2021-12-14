@@ -28,7 +28,7 @@ WHERE key_id=".$_GET['key_id'];
     }
 }
  mysqli_query($link,$zapros);
- if (mysqli_affected_rows($link)>0) {
+ if (mysqli_affected_rows($link)>=0) {
  echo 'Все сохранено. <a href="index.php"> Вернуться к списку
 игр </a>'; }
  else { echo 'Ошибка сохранения. <a href="index.php">
