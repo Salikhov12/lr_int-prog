@@ -1,6 +1,9 @@
 <html>
 <head> <title> Добавление нового магазина </title> </head>
 <body>
+    <?php 
+    include("check_oper.php");
+    ?>
 <H2>Добавление на сайт:</H2>
 <form action="save_new.php" metod="get">
  Название: <input name="store_name" size="50" type="text" required>

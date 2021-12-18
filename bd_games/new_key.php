@@ -2,7 +2,8 @@
 <head> <title> Добавление нового ключа </title> </head>
 <body>
 <?php
-$link = mysqli_connect("localhost","username","password") or die ("Невозможно
+include("check_oper.php");
+$link = mysqli_connect("localhost", "username","password") or die ("Невозможно
 подключиться к серверу"); // установление соединения с сервером
  mysqli_query($link,'SET NAMES UTF8'); // тип кодировки
  // подключение к базе данных:
@@ -47,6 +48,6 @@ echo "</select>";
 <input type='hidden' name='type' value=ключ>
 </form>
 <p>
-<a href="index.php"> Вернуться к списку игр </a>
+<a href="index.php"> Вернуться к спискам </a>
 </body>
 </html>

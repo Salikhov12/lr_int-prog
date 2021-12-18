@@ -4,6 +4,7 @@
 </head>
 <body>
 <?php
+include("check_oper.php");
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $link = mysqli_connect("localhost", "username","password") or die ("Невозможно
 подключиться к серверу"); // установление соединения с сервером

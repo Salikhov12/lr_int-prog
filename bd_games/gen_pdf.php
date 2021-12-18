@@ -1,15 +1,14 @@
 <?php
+include("check_oper.php");
  mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$link = mysqli_connect("localhost","username","password") or die ("Невозможно
+$link = mysqli_connect("localhost", "username","password") or die ("Невозможно
 подключиться к серверу"); // установление соединения с сервером
  mysqli_query($link,'SET NAMES UTF8'); // тип кодировки
  // подключение к базе данных:
  mysqli_select_db($link,"db_name") or die("Нет такой таблицы!");
- $result=mysqli_query($link,"select name, genre, 
- developer, publisher, game_key, date_buy, date_exp,
- url from games left outer JOIN `keys` on games.game_id=`keys`.`game_id` 
- left outer JOIN store on `keys`.`store_id`=store.store_id
-order by games.game_id");
+ $result=mysqli_query($link,"select name, genre, developer, publisher, game_key, date_buy, date_exp, url from games 
+ left outer JOIN `keys` on games.game_id=`keys`.`game_id` left outer JOIN store on `keys`.`store_id`=store.store_id
+order by games.name");
 $header= array("№ п/п","Название","Жанр","Разработчик","Издатель","Цифровой ключ","Дата приобретения",
 "Дата окончания","URL магазина");
 
@@ -22,7 +21,7 @@ function Headr($header)
 {   $this->SetFillColor(200);
     $this->Cell(12,7,iconv('utf-8', 'windows-1251',$header[0]),1,'','',true);
     $this->Cell(50,7,iconv('utf-8', 'windows-1251',$header[1]),1,'','',true);
-    $this->Cell(30,7,iconv('utf-8', 'windows-1251',$header[2]),1,'','',true);
+    $this->Cell(35,7,iconv('utf-8', 'windows-1251',$header[2]),1,'','',true);
     $this->Cell(50,7,iconv('utf-8', 'windows-1251',$header[3]),1,'','',true);
     $this->Cell(50,7,iconv('utf-8', 'windows-1251',$header[4]),1,'','',true);
     $this->Cell(50,7,iconv('utf-8', 'windows-1251',$header[5]),1,'','',true);
@@ -39,7 +38,7 @@ function BasicTable($result)
         $this->SetFillColor(235);
         $this->Cell(12,6,$a,1,'','',$fill);
         $this->Cell(50,6,iconv('utf-8', 'windows-1251',$object['name']),1,'','',$fill);
-        $this->Cell(30,6,iconv('utf-8', 'windows-1251',$object['genre']),1,'','',$fill);
+        $this->Cell(35,6,iconv('utf-8', 'windows-1251',$object['genre']),1,'','',$fill);
         $this->Cell(50,6,iconv('utf-8', 'windows-1251',$object['developer']),1,'','',$fill);
         $this->Cell(50,6,iconv('utf-8', 'windows-1251',$object['publisher']),1,'','',$fill);
         $this->Cell(50,6,iconv('utf-8', 'windows-1251',$object['game_key']),1,'','',$fill);
