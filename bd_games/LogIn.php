@@ -19,6 +19,7 @@
 <input type='hidden' name='fio' id='fio' value=''/>
 <br>
 <?php
+include("check_log.php");
 echo ("<input type='text' placeholder='Логин' class='combo' name='login' id='login' value='".$log."' required title='Введите ваш логин'><br><br>
 <input  class='combo' placeholder='Пароль' type='password' name='pass' id='pass' value='".$pass."' required  title='Введите ваш пароль'><br>");
 ?>
