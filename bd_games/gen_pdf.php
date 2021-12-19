@@ -42,8 +42,8 @@ function BasicTable($result)
         $this->Cell(50,6,iconv('utf-8', 'windows-1251',$object['developer']),1,'','',$fill);
         $this->Cell(50,6,iconv('utf-8', 'windows-1251',$object['publisher']),1,'','',$fill);
         $this->Cell(50,6,iconv('utf-8', 'windows-1251',$object['game_key']),1,'','',$fill);
-        $this->Cell(35,6,iconv('utf-8', 'windows-1251',$object['date_buy']),1,'','',$fill);
-        $this->Cell(35,6,iconv('utf-8', 'windows-1251',$object['date_exp']),1,'','',$fill);
+        $this->Cell(35,6,iconv('utf-8', 'windows-1251',date("d.m.Y", strtotime($object['date_buy']))),1,'','',$fill);
+        $this->Cell(35,6,iconv('utf-8', 'windows-1251',date("d.m.Y", strtotime($object['date_exp']))),1,'','',$fill);
         $this->Cell(60,6,iconv('utf-8', 'windows-1251',$object['url']),1,'','',$fill);
         $this->Ln();
         $a++;

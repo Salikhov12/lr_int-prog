@@ -118,8 +118,8 @@ WHERE `keys`.`game_id`=games.game_id AND `keys`.store_id=store.store_id");
 // запрос на выборку сведений о ключах
 while ($row=mysqli_fetch_array($result)){// для каждой строки из запроса
  echo "<tr>";
- echo "<td>" . $row['date_buy'] . "</td>";
- echo "<td>" . $row['date_exp'] . "</td>";
+ echo "<td>" . date("d.m.Y", strtotime($row['date_buy'])) . "</td>";
+ echo "<td>" . date("d.m.Y", strtotime($row['date_exp'])) . "</td>";
  echo "<td>" . $row['name'] . "</td>";
  echo "<td>" . $row['store_name'] . "</td>";
  echo "<td>" . $row['price'] . "</td>";

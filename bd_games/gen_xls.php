@@ -28,6 +28,8 @@ $sheet = $spreadsheet->getActiveSheet();
     );
 while($object = mysqli_fetch_array($result,MYSQLI_NUM)){
     $sheet->setCellValue('A'.$a+1,$a);
+	$object[5]=date("d.m.Y", strtotime($object[5]));
+    $object[6]=date("d.m.Y", strtotime($object[6]));
     $sheet->fromArray(
         $object,   // The data to set
         NULL,        // Array values with this value will not be set
