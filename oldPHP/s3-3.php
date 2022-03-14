@@ -1,25 +1,16 @@
 <HEAD> <TITLE>Салихов Рашит </TITLE> </HEAD>
-<body>
-Нечетный вариант.
-<br>
-<br>
+<body>Нечетный вариант.<br><br>
 <FORM method="post" action="<?php print $PHP_SELF ?>">
- <INPUT type="number" name="a" required>
- <br>
- <br>
+ <INPUT type="number" name="a" required> <br> <br>
  <SELECT NAME="z" SIZE="1">
  <OPTION VALUE="1" SELECTED> четные
  <OPTION VALUE="2"> нечетные
  <OPTION VALUE="3"> простые
  <OPTION VALUE="4"> составные 
- </SELECT>
- <br>
-  <P> <INPUT type="submit" name="obr" value="Вывести" >
-  <br>
-</FORM>
-</body>
-<?
-if (isset($_POST["obr"])) {
+ </SELECT> <br>
+  <P> <INPUT type="submit" name="obr" value="Вывести" >  <br>
+</FORM></body>
+<?if (isset($_POST["obr"])) {
 	switch($_POST['z']){
 	 case 1:{
 		 chet($_POST['a']); break;
@@ -53,9 +44,9 @@ function prost($n){
 			}
 			elseif (($i==$j)&&($i%$j==0)){
 				echo ($i." ");
+			}
 		}
 	}
-}
 }
 function sost($n){
 	for ($i=2;$i<=$n;$i++){
@@ -66,6 +57,4 @@ function sost($n){
 			}
 		}
 	}
-}
-
-?>
+}?>
