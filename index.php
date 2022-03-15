@@ -9,4 +9,7 @@
 <li><a href="Lab3.html">3</a>
 <li><a href="Lab4.html">4</a>
 <li><a href="Lab5.html">5</a>
+<li><a href="Lab6.html">6</a>
+<li><a href="Lab7.html">7</a>
+
 </ul>

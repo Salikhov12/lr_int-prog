@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>array Задание 7. Салихов Р.Н. </title>
+<script>
+function func(){
+	subjects = new Array("алгебра","геометрия","физика","химия","информатика","обществознание","литература","русский язык","история");
+	toch = new Array();
+	gum = new Array();
+	toch = subjects.slice(0,5);
+	gum = subjects.slice(5,9);
+	
+	document.write("Исходный массив: "+subjects+"<br>");
+	document.write("Точные науки: "+toch+"<br>");
+	document.write("Гуманитарные науки: "+gum+"<br>");
+}
+</script>
+</head>
+<body>
+<script language="JavaScript">
+func();
+</script>
+
+<br><br>
+<input type="button" value="Назад" onclick="location.href='index.php'"></input>
+</body>
+</html> 
