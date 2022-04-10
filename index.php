@@ -15,4 +15,7 @@
 <li><a href="lab_2-1.html">1</a>
 <li><a href="lab_2-2.html">2</a>
 <li><a href="lab_2-3.html">3</a>
+<li><a href="lab_2-4.html">4</a>
+<li><a href="lab_2-5.html">5</a>
+<li><a href="lab_2-6.html">6</a>
 </ul>

@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>
+Задание 4. Салихов Р.Н.
+</title>
+</head>
+<body>
+<script src="jquery-3.6.0.min.js"></script>
+<p id="cor">Координаты:</p>
+<script>
+$(document).ready(function(){
+	$(document).mousemove(function(e){
+		$("#cor").html("Координаты: x = "+e.pageX+" y = "+e.pageY);
+	});
+});
+</script>
+<input type="button" value="Назад" onclick="location.href='index.php'"></input>
+</body>
+</html>
