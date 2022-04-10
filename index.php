@@ -11,6 +11,7 @@
 <li><a href="Lab6.html">6</a>
 <li><a href="Lab7.html">7</a>
 <br>Лабораторная работа №2
+<li><a href="lab2_pr.html">Примеры</a>
 <li><a href="lab_2-1.html">1</a>
 <li><a href="lab_2-2.html">2</a>
 <li><a href="lab_2-3.html">3</a>
