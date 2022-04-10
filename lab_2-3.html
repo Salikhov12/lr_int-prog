@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>
+Задание 3. Салихов Р.Н.
+</title>
+</head>
+<body>
+Управление стрелочками<br>
+<img id="cat" src="catballoon.gif" style="position:relative">
+<script src="jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+	console.log("112332");
+	$(document).keyup(function(k){
+		if (k.key=="ArrowUp" || k.keyCode==38){
+			$("#cat").animate({top:"-=100"},200);
+			console.log("132");
+		}
+		if (k.key=="ArrowDown" || k.keyCode==40){
+			$("#cat").animate({top:"+=100"},200);
+		}
+		if (k.key=="ArrowLeft" || k.keyCode==37){
+			$("#cat").animate({right:"+=100"},200);
+		}
+		if (k.key=="ArrowRight" || k.keyCode==39){
+			$("#cat").animate({right:"-=100"},200);
+		}
+	});
+});
+</script>
+</body>
+</html>

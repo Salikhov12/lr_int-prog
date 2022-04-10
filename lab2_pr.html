@@ -1,0 +1,75 @@
+<html>
+
+<!-- 1 пример -->
+<body>
+	<div class = "wrapper">
+		<div id = "panel">
+			Выдвижная панель
+		</div>
+		<button class = "btn-slide">Нажми!</button>
+	</div>
+</body>
+<script src="jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".btn-slide").click(function() {
+			$("#panel").slideToggle("slow");
+			$(this).toggleClass("active");
+	});
+});
+</script>
+<br>
+<!-- 2 пример -->
+<div class="pane">
+	<span class="delete">X</span>
+	<p>jQuery - библиотека Javascript, фокусирующаяся на взаимодействии Javascript и HTML. Библиотека jQuery помогает легко получать доступ к любому элементу DOM, обращаться к атрибутам и содержимому элементов DOM, манипулировать ими. Также библиотека jQuery предоставляет удобный API при работе с AJAX.</p>
+</div>
+<script type="text/javascript">
+//Удаление элемента со страницы 
+	$(".pane .delete").click(function() {
+		$(this).parents(".pane").animate({ opacity: "hide" }, "slow");
+	}) ;
+</script>
+
+<!-- 3 пример -->
+
+<!-- Управление элементом на странице --> 
+<button class="run">Начать движение</button> 
+<div class="control_block_container">
+	<div id="box">Управляемый блок</div>
+</div>
+<script type="text/javascript">
+//Управление элементом на странице 
+$(".run").click(function() {
+	$("#box").animate({opacity: "0.1", left: "+=400"}, 1200)
+	.animate({opacity: "0.4", top: "+=160", height: "40", width: "40"}, "slow") 
+	.animate({opacity: "1", left: "0", height: "50", width: "100"}, "slow") 
+	.animate({top: "0"}, "fast") 
+	.slideUp() 
+	.slideDown("slow") 
+	return false;
+});
+</script>
+
+<!-- 4 пример -->
+<div class="accordion">
+	<h3>Первый заголовок</h3>
+	<p><b>Первый блок</b><br />jQuery - библиотека Javascript, фокусирующаяся на взаимодействии Javascript и HTML. Библиотека jQuery помогает легко получать доступ к любому элементу DOM, обращаться к атрибутам и содержимому элементов DOM, манипулировать ими. Также библиотека jQuery предоставляет удобный API при работе с AJAX.</p> 
+	<h3>Второй заголовок</h3>
+	<p><b>Первый блок</b><br />jQuery - библиотека Javascript, фокусирующаяся на взаимодействии Javascript и HTML.
+	Библиотека jQuery помогает легко получать доступ к любому элементу DOM, обращаться к атрибутам и содержимому элементов DOM, манипулировать ими. Также библиотека jQuery предоставляет удобный API при работе с AJAX.</p> 
+	<h3>Третий заголовок</h3>
+	<p><b>Первый блок</b><br />jQuery - библиотека Javascript, фокусирующаяся на взаимодействии Javascript и HTML. Библиотека jQuery помогает легко получать доступ к любому элементу DOM, обращаться к атрибутам и содержимому элементов DOM, манипулировать ими. Также библиотека jQuery предоставляет удобный API при работе с AJAX.</p>
+</div>
+<script>
+//Реализация блоков "аккордеон" 
+$(".accordion h3:first").addClass("active"); 
+$(".accordion p:not(:first)").hide(); 
+$(".accordion h3").click(function() {
+	$(this).next("p").slideToggle("slow").siblings("p:visible").slideUp("slow"); 
+	$(this).toggleClass("active"); 
+	$(this).siblings("h3").removeClass("active");
+});
+</script>
+
+</html>
