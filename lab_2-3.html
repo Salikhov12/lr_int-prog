@@ -10,11 +10,9 @@
 <script src="jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function(){
-	console.log("112332");
 	$(document).keyup(function(k){
 		if (k.key=="ArrowUp" || k.keyCode==38){
 			$("#cat").animate({top:"-=100"},200);
-			console.log("132");
 		}
 		if (k.key=="ArrowDown" || k.keyCode==40){
 			$("#cat").animate({top:"+=100"},200);
