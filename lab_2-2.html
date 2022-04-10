@@ -43,11 +43,11 @@ $(document).ready(function(){
 			
 	});
 	$("#b2").click(function (){
-		$("input:not(#b1)").val("");
+		$("input:not(#b1,#back)").val("");
 	});
 });
 </script>
 <!--  </form>  -->
-<p><input type="button" value="Назад" onclick="location.href='index.php'"></input>
+<p><input type="button" id="back" value="Назад" onclick="location.href='index.php'"></input>
 </body>
 </html>
