@@ -19,4 +19,6 @@
 <li><a href="lab_2-5.html">5</a>
 <li><a href="lab_2-6.html">6</a>
 <li><a href="lab_2-7.html">7</a>
+<br>Лабораторная работа №3
+<li><a href="3.html">1</a>
 </ul>

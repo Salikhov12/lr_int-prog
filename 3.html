@@ -1,0 +1,127 @@
+<html>
+<head>
+<title>
+Задание 1. Салихов Р.Н.
+</title>
+<style>
+body{
+	background: #dfdfdf;
+}
+.mainDiv{
+	width: 50%;
+	min-width:500px;
+	margin: 3% 25% 5%;
+	position:relative;
+	background:#eeeeee;
+	border-block-start: 8px solid #17ff08;
+	padding: 20px;
+}
+.boxInMain{
+	width: 96%;
+	height: auto;
+	position:relative;
+	background:#f0f0f0;
+	border: 1px solid #c8c8c8;
+	padding:1%;
+	display:flex;
+	margin: 1%;
+	text-decoration:none;
+	max-height: 165px;
+}
+.imag{
+	float: left;
+	width: 240px;
+	height: 100%;
+}
+.more{
+	position:relative;
+	float:right;
+	right:1%;
+	bottom:5px;
+}
+div .textIn p{
+	color: #272727;
+	margin: 3px 3px 3px 5px;
+	word-break: break-all;
+	max-height:130px;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+div .textIn h3{
+	color: #4d2903;
+	margin: 5px;
+	word-break: break-all;
+}
+@media (max-width:1000px){
+	.mainDiv{
+		width: 90%;
+		margin: 3% 4% 5%;
+	}
+}
+@media (min-width:2600px){
+	div .textIn p{
+		font-size:25;
+	}
+	
+	div .textIn h3{
+		font-size:30;
+	}	
+	.more{
+		font-size:25;
+	}
+	.mainDiv{
+		padding:40px;
+	}
+}
+</style>
+</head>
+<body>
+<script src="jquery-3.6.0.min.js"></script>
+<div class="mainDiv">
+	<a href="" class="boxInMain">
+		
+		<img class="imag" src="1.jpg">
+		<div class="textIn">
+			<h3>Некое событие</h3>
+			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
+		</div>
+	</a>
+	<a href="" class="boxInMain">
+		<img class="imag" src="1.jpg">
+		<div class="textIn">
+			<h3>Некое событие</h3>
+			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
+		</div>
+	</a>
+	<a href="" class="boxInMain">
+		<img class="imag" src="1.jpg">
+		<div class="textIn">
+			<h3>Некое событие</h3>
+			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
+		</div>
+	</a>
+	<a href="" class="boxInMain">
+		<img class="imag" src="1.jpg">
+		<div class="textIn">
+			<h3>Некое событие</h3>
+			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
+		</div>
+	</a>
+	<a href="" class="boxInMain">
+		<img class="imag" src="1.jpg">
+		<div class="textIn">
+			<h3>Некое событие</h3>
+			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
+		</div>
+	</a>
+	<input type="button" class="more" value="Загрузить еще...">
+</div>
+<script>
+$(document).ready(function(){
+	$(".boxInMain").mouseenter(function(){
+		$(this).animate({'border-left': '3px solid #17ff08'},100);
+	});
+});
+</script>
+</body>
+</html>
