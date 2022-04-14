@@ -49,7 +49,6 @@ body{
 div .textIn p{
 	color: #272727;
 	margin: 3px 3px 3px 5px;
-	word-break: break-all;
 	max-height:130px;
 	overflow:hidden;
 	text-overflow: ellipsis;
@@ -135,8 +134,8 @@ $(".more").ready(function(){
 });
 function load(result){ //Встройка данных на сайт
 	for (let i=0;i<(result.length/3);i++){
-		$(".more").before("<a href='' class='boxInMain'>"+
-		"<img class='imag' src='"+result[i*3]+"'>"+
+		$(".more").before("<a name='"+result[i*3]+"' href='#"+result[i*3]+"' class='boxInMain'>"+
+		"<img class='imag' src='img/"+result[i*3]+"'>"+
 		"<div class='textIn'>"+
 			"<h3>"+result[i*3+1]+"</h3>"+
 			"<p>"+result[i*3+2]+"</p>"+
