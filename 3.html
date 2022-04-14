@@ -38,6 +38,12 @@ body{
 	float:right;
 	right:1%;
 	bottom:5px;
+	border: none;
+	color: #272727;
+	border-bottom: 2px dashed #17ff08;
+}
+.more:active{
+	border-bottom: 2px dashed #0ba300;
 }
 div .textIn p{
 	color: #272727;
@@ -79,7 +85,7 @@ div .textIn h3{
 <script src="jquery-3.6.0.min.js"></script>
 <div class="mainDiv">
 	<a href="" class="boxInMain">
-		
+		<div class="line"></div>
 		<img class="imag" src="1.jpg">
 		<div class="textIn">
 			<h3>Некое событие</h3>
@@ -87,6 +93,7 @@ div .textIn h3{
 		</div>
 	</a>
 	<a href="" class="boxInMain">
+		<div class="line"></div>
 		<img class="imag" src="1.jpg">
 		<div class="textIn">
 			<h3>Некое событие</h3>
@@ -94,6 +101,7 @@ div .textIn h3{
 		</div>
 	</a>
 	<a href="" class="boxInMain">
+		<div class="line"></div>
 		<img class="imag" src="1.jpg">
 		<div class="textIn">
 			<h3>Некое событие</h3>
@@ -101,6 +109,7 @@ div .textIn h3{
 		</div>
 	</a>
 	<a href="" class="boxInMain">
+		<div class="line"></div>
 		<img class="imag" src="1.jpg">
 		<div class="textIn">
 			<h3>Некое событие</h3>
@@ -108,18 +117,30 @@ div .textIn h3{
 		</div>
 	</a>
 	<a href="" class="boxInMain">
+		<div class="line"></div>
 		<img class="imag" src="1.jpg">
 		<div class="textIn">
 			<h3>Некое событие</h3>
 			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
 		</div>
 	</a>
-	<input type="button" class="more" value="Загрузить еще...">
+	<input type="button" class="more" value="Загрузить еще">
 </div>
 <script>
 $(document).ready(function(){
 	$(".boxInMain").mouseenter(function(){
-		$(this).animate({'border-left': '3px solid #17ff08'},100);
+		$(this).attr("style","border:1px solid #17ff08");
+		$(this).animate({'borderLeftWidth':'7px'},100);
+	});
+	$(".boxInMain").mouseleave(function(){
+		$(this).animate({'borderLeftWidth':'1px'},100);
+		$(this).attr("style","border:1px solid #c8c8c8");
+	});
+	$(".more").mouseenter(function(){
+		$(this).animate({fontSize:'+=0.5'},50);
+	});
+	$(".more").mouseleave(function(){
+		$(this).animate({fontSize:'-=0.5'},50);
 	});
 });
 </script>
