@@ -32,6 +32,7 @@ body{
 	float: left;
 	width: 240px;
 	height: 100%;
+	max-height: 165px;
 }
 .more{
 	position:relative;
@@ -84,57 +85,27 @@ div .textIn h3{
 <body>
 <script src="jquery-3.6.0.min.js"></script>
 <div class="mainDiv">
-	<a href="" class="boxInMain">
-		<div class="line"></div>
-		<img class="imag" src="1.jpg">
-		<div class="textIn">
-			<h3>Некое событие</h3>
-			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
-		</div>
-	</a>
-	<a href="" class="boxInMain">
-		<div class="line"></div>
-		<img class="imag" src="1.jpg">
-		<div class="textIn">
-			<h3>Некое событие</h3>
-			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
-		</div>
-	</a>
-	<a href="" class="boxInMain">
-		<div class="line"></div>
-		<img class="imag" src="1.jpg">
-		<div class="textIn">
-			<h3>Некое событие</h3>
-			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
-		</div>
-	</a>
-	<a href="" class="boxInMain">
-		<div class="line"></div>
-		<img class="imag" src="1.jpg">
-		<div class="textIn">
-			<h3>Некое событие</h3>
-			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
-		</div>
-	</a>
-	<a href="" class="boxInMain">
-		<div class="line"></div>
-		<img class="imag" src="1.jpg">
-		<div class="textIn">
-			<h3>Некое событие</h3>
-			<p>123123123123123123123123123123123 123123123123123123123123123123123123123123123 12312312312312312312312312312312312312312312312312312312312312 31231231231231231231231231 231231231231231231 23123123123123123123123123123123123123123123123123123123123123123123123 123123123123123123123123123123123123123123123 </p>
-		</div>
-	</a>
+	
 	<input type="button" class="more" value="Загрузить еще">
 </div>
 <script>
-$(document).ready(function(){
+//Получение первых пяти статей
+$.get( "getdata_3.php",
+		{"param1": 5, "param2":0},
+		function( data ) {
+			var result = JSON.parse(data);
+			load(result);
+		}
+);
+$(".boxInMain").ready(function(){
+	//Анимации статей и кнопки
 	$(".boxInMain").mouseenter(function(){
-		$(this).attr("style","border:1px solid #17ff08");
+		$(this).attr("style","border-left:1px solid #17ff08");
 		$(this).animate({'borderLeftWidth':'7px'},100);
 	});
 	$(".boxInMain").mouseleave(function(){
 		$(this).animate({'borderLeftWidth':'1px'},100);
-		$(this).attr("style","border:1px solid #c8c8c8");
+		$(this).attr("style","border-left:1px solid #c8c8c8");
 	});
 	$(".more").mouseenter(function(){
 		$(this).animate({fontSize:'+=0.5'},50);
@@ -143,6 +114,31 @@ $(document).ready(function(){
 		$(this).animate({fontSize:'-=0.5'},50);
 	});
 });
+$(".more").ready(function(){
+//Нажатие на кнопку
+	$(".more").click(function(){
+		let n = $(".boxInMain").length;
+		$.get( "getdata_3.php",
+			{"param1": 5, "param2":n},
+			function( data ) {
+				var result = JSON.parse(data);
+				load(result);
+			}
+		);
+		
+	
+	});
+});
+function load(result){
+	for (let i=0;i<(result.length/3);i++){
+		$(".more").before("<a href='' class='boxInMain'>"+
+		"<img class='imag' src='"+result[i*3]+"'>"+
+		"<div class='textIn'>"+
+			"<h3>"+result[i*3+1]+"</h3>"+
+			"<p>"+result[i*3+2]+"</p>"+
+		"</div></a>");
+	}
+}
 </script>
 </body>
 </html>
