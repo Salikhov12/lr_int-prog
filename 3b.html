@@ -8,12 +8,34 @@
 </style>
 </head>
 <body>
-
-
-
-
+Имя:
+<input id="name" type="text"><br>
+Электронная почта:
+<input id="mail" type="email"><br>
+Сообщение:
+<input id="mess" type="text"><p>
+<input id="bt" type="button" value="Отправить">
+<script src="jquery-3.6.0.min.js"></script>
 <script>
+$(document).ready(function(){
+	$.get( "getdata_3b.php",
+			{},
+			function(data) {
+				var result = JSON.parse(data);
+				//load(result);
+			}
+	);
 
+	$("#bt").click(function(){
+		$.get( "setdata_3b.php",
+			{"mail": $("#mail")[0].value, "mess":$("#mess")[0].value, "name":$("#name")[0].value},
+			function( data ) {
+				var result = JSON.parse(data);
+				alert(result[0]);
+			}
+		);
+	});
+});
 </script>
 </body>
 </html>
