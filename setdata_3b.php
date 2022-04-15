@@ -9,12 +9,12 @@ $name = $_GET["name"];
 $query="insert into messag (name,mail,mess) 
 values ('".$name."','".$mail."','".$mess."')"; //Создание запроса для БД
 
-$result = "Произошла ошибка."; //Сообщение об ошибке по умолчанию
+$result = array("Произошла ошибка."); //Сообщение об ошибке по умолчанию
 
 pg_query($link,$query);
 if (pg_affected_rows($link)>0) 
 {
-	$result = "Отзыв успешно создан!"; //При успешном выыполнении запроса результат меняется.
+	$result[0] = "Отзыв успешно создан!"; //При успешном выыполнении запроса результат меняется.
 }
 echo json_encode($result,JSON_UNESCAPED_UNICODE);
 ?>

@@ -22,7 +22,7 @@ $(document).ready(function(){
 			{},
 			function(data) {
 				var result = JSON.parse(data);
-				//load(result);
+				load(result);
 			}
 	);
 
@@ -36,6 +36,11 @@ $(document).ready(function(){
 		);
 	});
 });
+function load(result){
+	for (let i=0;i<(result.length/3);i++){
+		$("#bt").after("<div>"+result[i*3]+" "+result[i*3+1]+" "+result[i*3+2]+"</div>");
+	}	
+}
 </script>
 </body>
 </html>
