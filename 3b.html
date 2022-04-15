@@ -4,17 +4,63 @@
 Задание 2. Салихов Р.Н.
 </title>
 <style>
-
+body{
+	background: #dfdfdf;
+}
+.inpt{
+	width: 50%;
+	min-width:500px;
+	margin: 3% 25% 5%;
+	position:relative;
+	background:#eeeeee;
+	border-block-start: 8px solid #0000ff;
+	padding: 20px;
+}
+.withText{
+	background: #eaeaff;
+	border: 1px solid #b3b3b3;
+}
+h2{
+	margin: 0px 5px 5px 5px;
+}
+.tItd{
+	font-size: 17px;
+	text-align: right;
+}
+#bt{
+	font-size: 17px;
+	border: 1px solid #e3e3e3;
+	color: #272727;
+	border-bottom: 2px solid #0000ff;
+	position: relative;
+}
+#bt:active{
+	border-bottom: 2px solid #0000b1;
+}
+}
 </style>
 </head>
 <body>
-Имя:
-<input id="name" type="text"><br>
-Электронная почта:
-<input id="mail" type="email"><br>
-Сообщение:
-<input id="mess" type="text"><p>
+<div class="inpt">
+<h2>Отзывы об услуге:</h2>
+<p style="margin:5px; font-size:19px;">Здесь вы можете оставить отзывы об оказанной нами услуге. Благодаря Вашим отзывам мы можем стать лучше!</p><br>
+<table>
+	<tr>
+		<td class="tItd">Ваше имя:</td>
+		<td><input class="withText" id="name" type="text" required></td>
+	</tr>
+	<tr>
+		<td class="tItd">Ваш e-mail:</td>
+		<td><input class="withText" id="mail" type="email" required></td>
+	</tr>
+	<tr>
+		<td style="vertical-align:top;" class="tItd">Текст сообщения:</td>
+		<td><textarea class="withText" id="mess" rows="10" cols="45" required></textarea></td>
+	</tr>
+</table>
 <input id="bt" type="button" value="Отправить">
+</div>
+
 <script src="jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -25,23 +71,45 @@ $(document).ready(function(){
 				load(result);
 			}
 	);
-
 	$("#bt").click(function(){
-		$.get( "setdata_3b.php",
-			{"mail": $("#mail")[0].value, "mess":$("#mess")[0].value, "name":$("#name")[0].value},
-			function( data ) {
-				var result = JSON.parse(data);
-				alert(result[0]);
-				if (result[0]=="Отзыв успешно создан!"){
-					$("#bt").after("<div>"+$("#name")[0].value+" "+$("#mail")[0].value+" "+$("#mess")[0].value+"</div>");
+		$ok = true;
+		if ($("#name").val().length==0){ //Имя
+			$("#name").attr("style","border-color:red;");
+			$ok = false;
+		}
+		if ($("#mess").val().length==0){ //Сообщение
+			$("#mess").attr("style","border-color:red;");
+			$ok = false;
+		}
+		if (!($("#mail")[0].value.match(/[_\w.-]+@\w+[.]\w+/g))){ //Электронная почта
+			$("#mail").attr("style","border-color:red;");
+			$ok = false;
+		}
+		setTimeout(function(){$(".withText").attr("style","")},400);
+		
+		if ($ok){
+			$.get( "setdata_3b.php",
+				{"mail": $("#mail")[0].value, "mess":$("#mess")[0].value, "name":$("#name")[0].value},
+				function( data ) {
+					var result = JSON.parse(data);
+					if (result[0]=="Отзыв успешно создан!"){
+						$(".impt").after("<div>"+$("#name")[0].value+" "+$("#mail")[0].value+" "+$("#mess")[0].value+"</div>");
+					}
+					alert(result[0]);
 				}
-			}
-		);
+			);
+		}
+	});
+	$("#bt").mousedown(function(){
+		$(this).attr("style","background:#d5d5d5;top:1px;left:1px;");
+	});
+	$("#bt").mouseup(function(){
+		$(this).attr("style","");
 	});
 });
 function load(result){
 	for (let i=0;i<(result.length/4);i++){
-		$("#bt").after("<div>"+result[i*4+1]+" "+result[i*4+2]+" "+result[i*4+3]+"</div>");
+		$(".impt").after("<div>"+result[i*4+1]+" "+result[i*4+2]+" "+result[i*4+3]+"</div>");
 	}	
 }
 </script>
