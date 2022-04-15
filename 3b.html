@@ -149,8 +149,8 @@ function load(result){
 		  result[i*4+2] = result[i*4+2].substring(0,1)+star+result[i*4+2].substring(a);
 		}
 		else{
-		  let star = result[i*4+2].substring(a-3,a).replaceAll(/[_\w.-]/g,"*");
-		  result[i*4+2] = result[i*4+2].substring(0,a-3);+star+result[i*4+2].substring(a);
+		  let star = "***";
+		  result[i*4+2] = result[i*4+2].substring(0,a-3)+star+result[i*4+2].substring(a);
 		}
 		$(".commBlock").prepend("<div><div class='commFrom'><span class='fromW'>"+result[i*4+1]+
 		"</span> <span class='em'>"+result[i*4+2]+"</span></div><div class='commBox'>"+result[i*4+3]+
