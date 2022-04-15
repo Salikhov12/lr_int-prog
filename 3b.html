@@ -97,14 +97,14 @@ h2{
 <script src="jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function(){
-	$.get( "getdata_3b.php",
+	$.get( "getdata_3b.php", //Загрузка отзывов
 			{},
 			function(data) {
 				var result = JSON.parse(data);
 				load(result);
 			}
 	);
-	$("#bt").click(function(){
+	$("#bt").click(function(){ //Проверка введенных данных
 		$ok = true;
 		if ($("#name").val().length==0){ //Имя
 			$("#name").attr("style","border-color:red;");
@@ -128,17 +128,20 @@ $(document).ready(function(){
 					if (result[0]=="Отзыв успешно создан!"){
 						let res = ["",$("#name")[0].value,$("#mail")[0].value,$("#mess")[0].value];
 						load(res);
+						$("#mess,#name,#mail").val("");
 					}
-					$("#mess,#name,#mail").val("");
 					alert(result[0]);
 				}
 			);
 		}
 	});
-	$("#bt").mousedown(function(){
+	$("#bt").mousedown(function(){ //Нажатие на кнопку
 		$(this).attr("style","background:#d5d5d5;top:1px;left:1px;");
 	});
-	$("#bt").mouseup(function(){
+	$("#bt").mouseup(function(){ //Отпускание кнопки
+		$(this).attr("style","");
+	});
+	$("#bt").mouseleave(function(){ //Выход за пределы кнопки
 		$(this).attr("style","");
 	});
 });
