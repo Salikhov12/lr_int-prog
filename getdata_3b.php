@@ -4,5 +4,9 @@ $link = pg_connect($conn_string);
 
  $query = 'SELECT * FROM messag';
 $result = pg_query($query) or die('Ошибка запроса: ' . pg_last_error());
-
+echo "<tr>";
+ echo "<td>" . $result['id'] . "</td>";
+ echo "<td>" . $result['mail'] . "</td>";
+ echo "<td>" . $result['mess'] . "</td>";
+ echo "<td>" . $result['name'] . "</td>";
 ?>
