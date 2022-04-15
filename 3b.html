@@ -126,7 +126,7 @@ $(document).ready(function(){
 				function( data ) {
 					var result = JSON.parse(data);
 					if (result[0]=="Отзыв успешно создан!"){
-						let res = array("",$("#name")[0].value,$("#mail")[0].value,$("#mess")[0].value);
+						let res = ["",$("#name")[0].value,$("#mail")[0].value,$("#mess")[0].value];
 						load(res);
 					}
 					alert(result[0]);
