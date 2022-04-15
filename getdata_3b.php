@@ -4,6 +4,7 @@ $link = pg_connect($conn_string); //Подключение к БД
 
 $query = 'SELECT * FROM messag'; //Создание запроса на получение всех записей из таблицы
 $result = pg_query($link,$query) or die('Ошибка запроса: ' . pg_last_error());
+$mass = array();
 while ($row=pg_fetch_row($result)){ // Для каждой строки из запроса
 	$mass = array_merge($mass,$row);
 }
