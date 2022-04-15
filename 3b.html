@@ -32,6 +32,9 @@ $(document).ready(function(){
 			function( data ) {
 				var result = JSON.parse(data);
 				alert(result[0]);
+				if (result[0]=="Отзыв успешно создан!"){
+					$("#bt").after("<div>"+$("#name")[0].value+" "+$("#mail")[0].value+" "+$("#mess")[0].value+"</div>");
+				}
 			}
 		);
 	});
