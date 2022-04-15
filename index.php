@@ -21,4 +21,5 @@
 <li><a href="lab_2-7.html">7</a>
 <br>Лабораторная работа №3
 <li><a href="3.html">1</a>
+<li><a href="3b.html">2</a>
 </ul>
