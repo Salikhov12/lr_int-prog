@@ -7,14 +7,39 @@
 body{
 	background: #dfdfdf;
 }
-.inpt{
+.inptBlock{
 	width: 50%;
 	min-width:500px;
-	margin: 3% 25% 5%;
+	margin: 3% 25% 1%;
 	position:relative;
 	background:#eeeeee;
 	border-block-start: 8px solid #0000ff;
 	padding: 20px;
+}
+.commBlock{
+	width: 50%;
+	min-width:500px;
+	margin: 0% 25% 5%;
+	position:relative;
+	background:#eeeeee;
+	padding: 20px;
+}
+.commBox{
+	width: 96%;
+	height: auto;
+	position:relative;
+	background:#f0f0f0;
+	border: 1px solid #e3e3e3;
+	padding:1%;
+	display:flex;
+	margin: 0% 1% 1%;
+}
+.commFrom{
+	width: 96%;
+	height: auto;
+	position:relative;
+	padding:0%;
+	margin: 1% 1% 0%;
 }
 .withText{
 	background: #eaeaff;
@@ -37,11 +62,17 @@ h2{
 #bt:active{
 	border-bottom: 2px solid #0000b1;
 }
+.fromW{
+	font-weight: bold;
+	font-size: 17px;
+}
+.em{
+	color:#8f8f8f;
 }
 </style>
 </head>
 <body>
-<div class="inpt">
+<div class="inptBlock">
 <h2>Отзывы об услуге:</h2>
 <p style="margin:5px; font-size:19px;">Здесь вы можете оставить отзывы об оказанной нами услуге. Благодаря Вашим отзывам мы можем стать лучше!</p><br>
 <table>
@@ -51,16 +82,18 @@ h2{
 	</tr>
 	<tr>
 		<td class="tItd">Ваш e-mail:</td>
-		<td><input class="withText" id="mail" type="email" required></td>
+		<td><input class="withText" id="mail" type="email" placeholder="example@mail.com" required></td>
 	</tr>
 	<tr>
 		<td style="vertical-align:top;" class="tItd">Текст сообщения:</td>
-		<td><textarea class="withText" id="mess" rows="10" cols="45" required></textarea></td>
+		<td><textarea class="withText" id="mess" rows="10" cols="45" maxlength="470" required></textarea></td>
 	</tr>
 </table>
 <input id="bt" type="button" value="Отправить">
 </div>
+<div class="commBlock">
 
+</div>
 <script src="jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -81,7 +114,7 @@ $(document).ready(function(){
 			$("#mess").attr("style","border-color:red;");
 			$ok = false;
 		}
-		if (!($("#mail")[0].value.match(/[_\w.-]+@\w+[.]\w+/g))){ //Электронная почта
+		if (!($("#mail")[0].value.match(/[_\w.-]{2,}@\w+[.]\w+/g))){ //Электронная почта. Перед @ минимум 2 символа
 			$("#mail").attr("style","border-color:red;");
 			$ok = false;
 		}
@@ -93,7 +126,8 @@ $(document).ready(function(){
 				function( data ) {
 					var result = JSON.parse(data);
 					if (result[0]=="Отзыв успешно создан!"){
-						$(".inpt").after("<div>"+$("#name")[0].value+" "+$("#mail")[0].value+" "+$("#mess")[0].value+"</div>");
+						let res = array("",$("#name")[0].value,$("#mail")[0].value,$("#mess")[0].value);
+						load(res);
 					}
 					alert(result[0]);
 				}
@@ -109,7 +143,18 @@ $(document).ready(function(){
 });
 function load(result){
 	for (let i=0;i<(result.length/4);i++){
-		$(".inpt").after("<div>"+result[i*4+1]+" "+result[i*4+2]+" "+result[i*4+3]+"</div>");
+		let a = result[i*4+2].indexOf("@");
+		if (a<4){
+		  let star = result[i*4+2].substring(1,a).replaceAll(/[_\w.-]/g,"*");
+		  result[i*4+2] = result[i*4+2].substring(0,1)+star+result[i*4+2].substring(a);
+		}
+		else{
+		  let star = result[i*4+2].substring(a-3,a).replaceAll(/[_\w.-]/g,"*");
+		  result[i*4+2] = result[i*4+2].substring(0,a-3);+star+result[i*4+2].substring(a);
+		}
+		$(".commBlock").prepend("<div><div class='commFrom'><span class='fromW'>"+result[i*4+1]+
+		"</span> <span class='em'>"+result[i*4+2]+"</span></div><div class='commBox'>"+result[i*4+3]+
+		"</div></div>");
 	}	
 }
 </script>
