@@ -93,7 +93,7 @@ $(document).ready(function(){
 				function( data ) {
 					var result = JSON.parse(data);
 					if (result[0]=="Отзыв успешно создан!"){
-						$(".impt").after("<div>"+$("#name")[0].value+" "+$("#mail")[0].value+" "+$("#mess")[0].value+"</div>");
+						$(".inpt").after("<div>"+$("#name")[0].value+" "+$("#mail")[0].value+" "+$("#mess")[0].value+"</div>");
 					}
 					alert(result[0]);
 				}
@@ -109,7 +109,7 @@ $(document).ready(function(){
 });
 function load(result){
 	for (let i=0;i<(result.length/4);i++){
-		$(".impt").after("<div>"+result[i*4+1]+" "+result[i*4+2]+" "+result[i*4+3]+"</div>");
+		$(".inpt").after("<div>"+result[i*4+1]+" "+result[i*4+2]+" "+result[i*4+3]+"</div>");
 	}	
 }
 </script>
