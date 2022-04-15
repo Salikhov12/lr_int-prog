@@ -37,8 +37,8 @@ $(document).ready(function(){
 	});
 });
 function load(result){
-	for (let i=0;i<(result.length/3);i++){
-		$("#bt").after("<div>"+result[i*3]+" "+result[i*3+1]+" "+result[i*3+2]+"</div>");
+	for (let i=0;i<(result.length/4);i++){
+		$("#bt").after("<div>"+result[i*4+1]+" "+result[i*4+2]+" "+result[i*4+3]+"</div>");
 	}	
 }
 </script>
