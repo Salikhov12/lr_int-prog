@@ -1,5 +1,5 @@
 <?php
-$conn_string = "host=ec2-63-32-248-14.eu-west-1.compute.amazonaws.com port=5432 dbname=d4g919fr15hiaf user=hldnnyytoneyba password=715cf9b0dcfd8629ae613b113a1ba08f88dc46e0c94d649f353382f652617489 options='--client_encoding=UTF8'";
+$conn_string = "host=ec2-54-228-32-29.eu-west-1.compute.amazonaws.com port=5432 dbname=d13vaqklogidto user=grwixcyucflxrt password=aa7c43bb2b037e1026b1b48599a535b047b394e1a2699c48a60686bc32bc3cdf options='--client_encoding=UTF8'";
 $link = pg_connect($conn_string); //Подключение к БД
 
 $query = 'SELECT * FROM messag'; //Создание запроса на получение всех записей из таблицы
