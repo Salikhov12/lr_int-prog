@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>
+Салихов Рашит. Лабораторная работа №4.
+</title>
+</head>
+<style>
+body{
+	background: #181818;
+}
+.FirstForm{
+	width: 50%;
+	margin: 1% 25% 5%;
+	position: relative;
+}
+.SecondForm{
+	width: 50%;
+	margin: 1% 25% 5%;
+}
+img{}
+</style>
+<!--Подключение библиотек-->
+<!--FancyZoom-->
+<link rel="stylesheet" href="../../lib/jquery.fancyzoom-1.0.2/css/fancyzoom.css">
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>var FancyZ = jQuery.noConflict();</script><!--Для использования другой версии jQuery-->
+<script src="../../lib/jquery.fancyzoom-1.0.2/js/jquery.fancyzoom.min.js"></script>
+<!--jCarousel-->
+<script type="text/javascript" src="../../lib/jcarousel-0.3.9/dist/jquery.jcarousel.min.js"></script>
+<link rel="stylesheet" type="text/css" href="jcarousel.css" /> 
+<!--jQuery-UI-->
+<link rel="stylesheet" href="../../lib/jquery-ui-1.13.1.custom/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script> 
+<!--Подключили-->
+<body>
+<!--Первая форма-->
+<div class="FirstForm" id="tabs">
+	<!--Верхние вкладки-->
+	<ul>
+		<li><a id="a1" href="#tabs-1">Пример 1</a></li>
+		<li><a id="a2" href="#tabs-2">Пример 2</a></li>
+		<li><a id="a3" href="#tabs-3">Пример 3</a></li>
+    </ul>
+	<!--Первая вкладка-->
+  <div id="tabs-1" aria-hidden="false">
+	<!--Images-->
+	<div>
+	<!-- Wrapper -->
+	<div class="jcarousel-wrapper" id="jw1">
+		<!-- Carousel -->
+		<div class="jcarousel" id="jca1">
+		<ul>
+			<li><a href="../../img/4.2.large.jpg" class="fancy"><img class="img" src="../../img/4.2.small.jpg"></a></li>
+			<li><a href="../../img/4.4.large.jpg" class="fancy"><img class="img" src="../../img/4.4.small.jpg"></a></li>
+		</ul>
+		</div>
+	</div>	
+	<!-- Controls -->
+	<p class="jcarousel-pagination"></p>	
+	</div>
+	<!--Text-->
+  </div>
+  <!--Вторая вкладка-->
+  <div id="tabs-2">
+    <!--Images-->
+	<div>
+	<!-- Wrapper -->
+	<div class="jcarousel-wrapper" id="jw2">
+		<!-- Carousel -->
+		<div class="jcarousel" id="jca2">
+		<ul>
+			<li><a href="../../img/4.2.large.jpg" class="fancy"><img class="img" src="../../img/4.2.small.jpg"></a></li>
+			<li><a href="../../img/4.3.large.jpg" class="fancy"><img class="img" src="../../img/4.3.small.jpg"></a></li>
+		</ul>
+		</div>
+	</div>	
+	<!-- Controls -->
+	<p class="jcarousel-pagination"></p>	
+	</div>
+	<!--Text-->
+	
+  </div>
+  <!--Третья вкладка-->
+  <div id="tabs-3">
+    <!--Images-->
+	<div>
+	<!-- Wrapper -->
+	<div class="jcarousel-wrapper" id="jw3">
+		<!-- Carousel -->
+		<div class="jcarousel" id="jca3">
+		<ul>
+			<li><a href="../../img/4.2.large.jpg" class="fancy"><img class="img" src="../../img/4.2.small.jpg"></a></li>
+			<li><a href="../../img/4.3.large.jpg" class="fancy"><img class="img" src="../../img/4.3.small.jpg"></a></li>
+		</ul>
+		</div>
+	</div>	
+	<!-- Controls -->
+	<p class="jcarousel-pagination"></p>	
+	</div>
+	<!--Text-->
+	
+  </div>
+</div>
+<!--Вторая форма-->
+<div class="SecondForm">
+
+</div>
+<script>
+(function($){ //Запуск FancyZoom
+	$("a.fancy").fancyZoom();
+})(FancyZ); 
+</script>
+</body>
+<script>
+$(function(){ //Отображение панели вкладок
+    $("#tabs").tabs();
+});
+$("#a1,#a2,#a3").click(function(){ //При нажатии на вкладку
+	var jcIdForAS = $(this)[0].id;
+	(function($){ //Останавливается автоскроллинг
+		$('.jcarousel').jcarouselAutoscroll('stop');
+	})(FancyZ);
+	(function($){ //Запускается автоскроллинг выбранной вкладки
+		$('#jc'+jcIdForAS).jcarouselAutoscroll('start');
+	})(FancyZ);
+});
+(function($){ // Основной код, в котором требуется другая версия jQuery
+	$('.jcarousel').on('jcarousel:create', function(event, carousel) { // Установка размеров блока при создании jcarousel
+		var jwid = this.parentElement.id;
+		$("#"+jwid).animate({height:this.clientHeight,width:this.clientWidth},400);
+	});
+	$('.jcarousel').on('jcarousel:visiblein', 'li', function(event, carousel) { // Установка размеров блока, когда изображение становится видимым
+		var hid = this.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("aria-hidden");
+		var jwid = this.parentElement.parentElement.parentElement.id;
+		if ((hid!="true") && (!!hid)){	// Если атрибут вкладки "видимый" и этот атрибут существует
+			$("#"+jwid).animate({height:this.clientHeight,width:this.clientWidth},400);
+		}
+		var target = $('.jcarousel').jcarousel('target');
+	});
+	$('.jcarousel').jcarousel({wrap: 'circular'}); // Карусель будет циклична
+	$('.jcarousel-pagination').jcarouselPagination({ // Создание кнопок для выбора изображения
+		item: function(page) {
+			if (page==1){return '<a href="#' +this['_carousel'][0].parentElement.id+page + '"class="active">' + page + '</a>';} // Установка кнопки "нажатой", если изображение - первое
+			return '<a href="#' +this['_carousel'][0].parentElement.id+page + '">' + page + '</a>';
+      }
+	});
+	$('.jcarousel').jcarouselAutoscroll({ // Настройки автоскролла изображений
+      interval: 3000,
+      target: '+=1',
+      autostart: false,
+	  auto: 2
+	});
+	$('#jca1').jcarouselAutoscroll('start'); // Запуск автоскролла на первой вкладке
+	$('.jcarousel-pagination').on('jcarouselpagination:active', 'a', function() { // При становлении кнопки "нажатой"
+		let elem = $(this)[0].parentElement.parentElement.parentElement;
+		if (elem.getAttribute("aria-hidden")=="false"){
+			$(this).addClass('active');
+		}
+	})
+	$('.jcarousel-pagination').on('jcarouselpagination:inactive', 'a', function() { // При становлении кнопки "отжатой"
+		let elem = $(this)[0].parentElement.parentElement.parentElement;
+		if (elem.getAttribute("aria-hidden")=="false"){
+			$(this).removeClass('active');
+		}
+	})
+})(FancyZ); 
+
+</script>
+</html>

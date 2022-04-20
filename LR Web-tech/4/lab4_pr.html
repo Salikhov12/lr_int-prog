@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>
+Салихов Рашит. Примеры
+</title>
+</head>
+
+<link rel="stylesheet" href="../../lib/jquery-ui-1.13.1.custom/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>var another = jQuery.noConflict();</script> <!--Для использования другой версии jQuery-->
+<script src="../../lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script> 
+<body>
+
+<link rel="stylesheet" href="../../lib/jquery.fancyzoom-1.0.2/css/fancyzoom.css">
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="../../lib/jquery.fancyzoom-1.0.2/js/jquery.fancyzoom.min.js"></script>
+
+<p><a href="../../img/4.1.large.jpg" title="1" rel = "gr" class="fancy"><img src="../../img/4.1.small.jpg"></a></p>
+<p><a href="../../img/4.2.large.jpg" title="2" rel = "gr" class="fancy"><img src="../../img/4.2.small.jpg"></a></p>
+<p><a href="../../img/4.3.large.jpg" title="3" rel = "gr" class="fancy"><img src="../../img/4.3.small.jpg"></a></p>
+<p><a href="../../img/4.4.large.jpg" title="4" rel = "gr" class="fancy"><img src="../../img/4.4.small.jpg"></a></p>
+
+<script>
+$(document).ready(function() {
+ $("a.fancy").fancyZoom();
+}); 
+</script>
+
+<div id="accordion">
+	<h3>1</h3>
+	<div>
+		<p>1</p>
+	</div>
+	<h3>2</h3>
+	<div>
+		<p>2</p>
+	</div>
+	<h3>3</h3>
+	<div>
+		<p>3</p>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</div>
+</div>
+<br>
+<form class="form-inline">
+	<div class="form-group"
+		label for="search">Поиск:</label>
+		<input type="text" class="form-control" id="search">
+	</div>
+</form>
+
+<input type="button" value="Назад" onclick="location.href='../../index.php'"></input>
+
+</body>
+<script>
+(function($){
+	$("#accordion").accordion({
+collapsible: true,
+heightStyle : "content"
+});
+})(another);
+
+
+
+  ( function($) {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#search" ).autocomplete({
+      source: availableTags, minLength: 3
+    });
+  } )(another);
+
+</script>
+</html>

@@ -1,0 +1,151 @@
+<html>
+<head>
+<title>
+Задание 1. Салихов Р.Н.
+</title>
+<style>
+body{
+	background: #dfdfdf;
+}
+.mainDiv{
+	width: 50%;
+	min-width:500px;
+	margin: 3% 25% 5%;
+	position:relative;
+	background:#eeeeee;
+	border-block-start: 8px solid #17ff08;
+	padding: 20px;
+}
+.boxInMain{
+	width: 96%;
+	height: auto;
+	position:relative;
+	background:#f0f0f0;
+	border: 1px solid #c8c8c8;
+	padding:1%;
+	display:flex;
+	margin: 1%;
+	text-decoration:none;
+	max-height: 165px;
+}
+.imag{
+	float: left;
+	width: 240px;
+	height: 100%;
+	max-height: 165px;
+}
+.more{
+	position:relative;
+	float:right;
+	right:1%;
+	bottom:5px;
+	border: none;
+	color: #272727;
+	border-bottom: 2px dashed #17ff08;
+}
+.more:active{
+	border-bottom: 2px dashed #0ba300;
+}
+div .textIn p{
+	color: #272727;
+	margin: 3px 3px 3px 5px;
+	max-height:130px;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+div .textIn h3{
+	color: #4d2903;
+	margin: 5px;
+	word-break: break-all;
+}
+@media (max-width:1000px){
+	.mainDiv{
+		width: 90%;
+		margin: 3% 4% 5%;
+	}
+}
+@media (min-width:2600px){
+	div .textIn p{
+		font-size:25;
+	}
+	
+	div .textIn h3{
+		font-size:30;
+	}	
+	.more{
+		font-size:25;
+	}
+	.mainDiv{
+		padding:40px;
+	}
+}
+</style>
+</head>
+<body>
+<script src="../../lib/jquery-3.6.0.min.js"></script>
+<div class="mainDiv">
+	
+	<input type="button" class="more" value="Загрузить еще">
+</div>
+<script>
+var endOfRes = 0;
+$(document).ready(function(){
+	//Получение первых пяти статей
+	$.get( "getdata_3.php",
+			{"param1": 5, "param2":0},
+			function( data ) {
+				var result = JSON.parse(data);
+				hideButton(result.length);
+				load(result);
+			}
+	);
+
+	//Анимации статей
+	$(".mainDiv").on("mouseenter",".boxInMain",function(){
+		$(this).attr("style","border-left:1px solid #17ff08");
+		$(this).animate({'borderLeftWidth':'7px'},100);
+	});
+	$(".mainDiv").on("mouseleave",".boxInMain",function(){
+		$(this).animate({'borderLeftWidth':'1px'},100);
+		$(this).attr("style","border-left:1px solid #c8c8c8");
+	});
+});
+
+$(".more").ready(function(){
+	//Анимация кнопки
+	$(".more").mouseenter(function(){
+		$(this).animate({fontSize:'+=0.5'},50);
+	});
+	$(".more").mouseleave(function(){
+		$(this).animate({fontSize:'-=0.5'},50);
+	});
+	//Нажатие на кнопку
+	$(".more").click(function(){
+		let n = $(".boxInMain").length;
+		$.get( "getdata_3.php",
+			{"param1": 5, "param2":n},
+			function( data ) {
+				var result = JSON.parse(data);
+				hideButton(result.length);
+				load(result);
+			}
+		);
+	});
+});
+function load(result){ //Встройка данных на сайт
+	for (let i=0;i<(result.length/3);i++){
+		$(".more").before("<a name='"+result[i*3]+"' href='#"+result[i*3]+"' class='boxInMain'>"+
+		"<img class='imag' src='img/"+result[i*3]+"'>"+
+		"<div class='textIn'>"+
+			"<h3>"+result[i*3+1]+"</h3>"+
+			"<p>"+result[i*3+2]+"</p>"+
+		"</div></a>");
+	}
+}
+function hideButton(endOfRes){
+	if (endOfRes<15){$(".more").hide();}
+	else{$(".more").show();}
+}
+</script>
+</body>
+</html>

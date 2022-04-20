@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>
+Задание 2. Салихов Р.Н.
+</title>
+</head>
+<body>
+<!-- <FORM method="post"> -->
+Ваше имя:* <input id="name" type="text" required><p>
+Пароль:* <input id="pass" type="password" required><p>
+Подтверждение пароля:* <input id="passcon" type="password" required><p>
+Email:* <input id="email" type="email" required><p>
+Тема сообщения: <input id="theme" type="text"><p>
+Сообщение: <input id="mess" type="text"><p>
+<input type="submit" id="b1" >
+<button id="b2" >Очистить</button>
+
+<script src="../../lib/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#b1").click(function (){
+			$("input:not(#theme):lt(5)").each(function (){
+				var a = $(this);
+				if ($(this).val().length==0){ //Все элементы кроме Темы сообщения
+					$(this).attr("style","border-color:red;");
+				}
+				if ($(this)[0].id=="mess" && $(this).val().length<=10){ //Сообщение
+					$(this).attr("style","border-color:red;");
+				}
+				if ($(this)[0].id=="pass" || $(this)[0].id=="passcon"){ //Пароль и подтверждение
+					if($(this).val().length<=4){
+						$(this).attr("style","border-color:red;");
+					}
+					if($("input:not(#theme):lt(5)")[1].value!=$("input:not(#theme):lt(5)")[2].value){
+						$(this).attr("style","border-color:red;");
+					}
+				}
+				if ($(this)[0].id=="email" && !($(this)[0].value.match(/[_\w.-]+@\w+[.]\w+/g))){
+					$(this).attr("style","border-color:red;");
+				}
+				setTimeout(function(){a.attr("style","")},400);
+			});
+			
+	});
+	$("#b2").click(function (){
+		$("input:not(#b1,#back)").val("");
+	});
+});
+</script>
+<!--  </form>  -->
+<input type="button" value="Назад" onclick="location.href='../../index.php'"></input>
+</body>
+</html>
