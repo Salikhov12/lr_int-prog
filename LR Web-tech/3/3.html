@@ -135,7 +135,7 @@ $(".more").ready(function(){
 function load(result){ //Встройка данных на сайт
 	for (let i=0;i<(result.length/3);i++){
 		$(".more").before("<a name='"+result[i*3]+"' href='#"+result[i*3]+"' class='boxInMain'>"+
-		"<img class='imag' src='img/"+result[i*3]+"'>"+
+		"<img class='imag' src='../../img/"+result[i*3]+"'>"+
 		"<div class='textIn'>"+
 			"<h3>"+result[i*3+1]+"</h3>"+
 			"<p>"+result[i*3+2]+"</p>"+
