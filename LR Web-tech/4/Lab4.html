@@ -113,6 +113,14 @@ img{}
 </script>
 </body>
 <script>
+jQuery.preloadImages = function() // Подгрузка изображений в буфер
+{
+	for(var i = 0; i < arguments.length; i++)
+	{
+		jQuery("<img>").attr("src", arguments[ i ]);
+	}
+};
+$.preloadImages("../../img/4.2.small.jpg","../../img/4.3.small.jpg","../../img/4.4.small.jpg");	// Путь к изображениям
 $(function(){ //Отображение панели вкладок
     $("#tabs").tabs();
 });
