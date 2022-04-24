@@ -29,8 +29,9 @@
 /** Carousel Pagination **/
 
 .jcarousel-pagination {
-    position: absolute;
+    position: relative;
     bottom: 0;
+	width: 0;
     right: 15px;
 }
 .jcarousel-pagination a {

@@ -40,6 +40,11 @@ body{
 	height: 50px;
     width: 180;
 }
+h2{
+	margin: 0;
+	position:relative;
+	top:-15;
+}
 </style>
 <!--Подключение библиотек-->
 <!--FancyZoom-->
@@ -67,13 +72,13 @@ body{
 	<!--Первая вкладка-->
   <div id="tabs-1" style="padding: 2em 0.1em;" aria-hidden="false">
 	<div class="poster">
-		<a href="../../img/4.1.large.jpg" class="fancy"><img src="../../img/4.1.small.jpg"></a>
+		<a href="../../img/4.1.large.jpg" class="fancy"><img src="../../img/4.2.small.jpg"></a>
 		<input type="button" class="bt" id="bt1" value="Купить">
 	</div>
 	<!--Images-->
 	<div class="imag">
-	<!--Text-->
-	<p>флвофдлыв щфрвш рфыщш грфышщ грвшщгфыр вшгр фшгыр фвыфвфывыфв фывфыв фыв фывфывыфвфыв фывыфвфывыфв ф  выфвфыв фыв фы в фв фывфы вфы вф ыв фыв фы выф вфы в фвыфвыфв</p>
+	<!--Title-->
+	<h2>Название штуки 1</h2>
 	<!-- Wrapper -->
 	<div class="jcarousel-wrapper" id="jw1">
 		<!-- Carousel -->
@@ -87,6 +92,7 @@ body{
 	<!-- Controls -->
 	<p class="jcarousel-pagination"></p>	
 	</div>
+	<!--Text-->
 	<div>
 		<p class="about">флвофдлыв щфрвш рфыщш грфышщ грвшщгфыр вшгр фшгыр фвыфвфывыфв фывфыв фыв фывфывыфвфыв фывыфвфывыфв ф  выфвфыв фыв фы в фв фывфы вфы вф ыв фыв фы выф вфы в фвыфвыфв</p>
 	</div>
@@ -94,19 +100,19 @@ body{
   <!--Вторая вкладка-->
   <div id="tabs-2" style="padding: 2em 0.1em;" >
 	<div class="poster">
-		<a href="../../img/4.1.large.jpg" class="fancy"><img src="../../img/4.1.small.jpg"></a>
+		<a href="../../img/4.1.large.jpg" class="fancy"><img src="../../img/4.3.small.jpg"></a>
 		<input type="button" class="bt" id="bt2" value="Купить">
 	</div>
     <!--Images-->
 	<div class="imag">
-	<!--Text-->
-	<p>флвофдлыв щфрвш рфыщш грфышщ грвшщгфыр вшгр фшгыр фвыфвфывыфв фывфыв фыв фывфывыфвфыв фывыфвфывыфв ф  выфвфыв фыв фы в фв фывфы вфы вф ыв фыв фы выф вфы в фвыфвыфв</p>
+	<!--Title-->
+	<h2>Название штуки 2</h2>
 	<!-- Wrapper -->
 	<div class="jcarousel-wrapper" id="jw2">
 		<!-- Carousel -->
 		<div class="jcarousel" id="jca2">
 		<ul>
-			<li><a href="../../img/4.2.large.jpg" class="fancy"><img src="../../img/4.2.small.jpg"></a></li>
+			<li><a href="../../img/4.2.large.jpg" class="fancy"><img src="../../img/5862361.jpg"></a></li>
 			<li><a href="../../img/4.3.large.jpg" class="fancy"><img src="../../img/4.3.small.jpg"></a></li>
 		</ul>
 		</div>
@@ -114,6 +120,7 @@ body{
 	<!-- Controls -->
 	<p class="jcarousel-pagination"></p>	
 	</div>
+	<!--Text-->
 	<div>
 		<p class="about">флвофдлыв щфрвш рфыщш грфышщ грвшщгфыр вшгр фшгыр фвыфвфывыфв фывфыв фыв фывфывыфвфыв фывыфвфывыфв ф  выфвфыв фыв фы в фв фывфы вфы вф ыв фыв фы выф вфы в фвыфвыфв</p>
 	</div>
@@ -126,8 +133,8 @@ body{
 	</div>
     <!--Images-->
 	<div class="imag">
-	<!--Text-->
-	<p>флвофдлыв щфрвш рфыщш грфышщ грвшщгфыр вшгр фшгыр фвыфвфывыфв фывфыв фыв фывфывыфвфыв фывыфвфывыфв ф  выфвфыв фыв фы в фв фывфы вфы вф ыв фыв фы выф вфы в фвыфвыфв</p>
+	<!--Title-->
+	<h2>Название штуки 3</h2>
 	<!-- Wrapper -->
 	<div class="jcarousel-wrapper" id="jw3">
 		<!-- Carousel -->
@@ -141,6 +148,7 @@ body{
 	<!-- Controls -->
 	<p class="jcarousel-pagination"></p>	
 	</div>
+	<!--Text-->
 	<div>
 		<p class="about">флвофдлыв щфрвш рфыщш грфышщ грвшщгфыр вшгр фшгыр фвыфвфывыфв фывфыв фыв фывфывыфвфыв фывыфвфывыфв ф  выфвфыв фыв фы в фв фывфы вфы вф ыв фыв фы выф вфы в фвыфвыфв</p>
 	</div>
@@ -165,7 +173,7 @@ jQuery.preloadImages = function(){ // Подгрузка изображений 
 		jQuery("<img>").attr("src", arguments[ i ]);
 	}
 };
-$.preloadImages("../../img/4.2.small.jpg","../../img/4.3.small.jpg","../../img/4.4.small.jpg");	// Путь к изображениям
+$.preloadImages("../../img/4.2.small.jpg","../../img/4.3.small.jpg","../../img/4.4.small.jpg","../../img/5862361.jpg");	// Путь к изображениям
 $("#a1,#a2,#a3").click(function(){ //При нажатии на вкладку
 	var jcIdForAS = $(this)[0].id;
 	(function($){ //Останавливается автоскроллинг
@@ -175,26 +183,35 @@ $("#a1,#a2,#a3").click(function(){ //При нажатии на вкладку
 		$('#jc'+jcIdForAS).jcarouselAutoscroll('start');
 	})(FancyZ);
 	$(".SecondForm").hide();
+	setTimeout(function() {(function($){ // paging
+		$('#pjw'+jcIdForAS.substring(1,2)).animate({top:$(".about:eq("+(jcIdForAS.substring(1,2)-1)+")").position()['top'] - $(".jcarousel-wrapper:eq("+(jcIdForAS.substring(1,2)-1)+")").position()['top']},0);
+		//$('#jc'+jcIdForAS).jcarouselAutoscroll('start');
+	})(FancyZ);},0);
 });
 $(window).load(function(){
 	(function($){ // Основной код, в котором требуется другая версия jQuery
 		$('.jcarousel').on('jcarousel:create', function(event, carousel) { // Установка размеров блока при создании jcarousel
 			var jwid = this.parentElement.id;
-			$("#"+jwid).animate({height:maxHeightOfImage(parseInt(jwid.substring(2,3))),width:this.clientWidth},0);
+			$("#"+jwid).animate({height:maxHeightOfImage(parseInt(jwid.substring(2,3))),width:maxWidthOfImage(parseInt(jwid.substring(2,3)))},0);
 		});
-		/*$('.jcarousel').on('jcarousel:visiblein', 'li', function(event, carousel) { // Установка размеров блока, когда изображение становится видимым
+		$('.jcarousel').on('jcarousel:visiblein', 'li', function(event, carousel) { // Установка размеров блока, когда изображение становится видимым
 			var hid = this.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("aria-hidden");
 			var jwid = this.parentElement.parentElement.parentElement.id;
 			if ((hid!="true") && (!!hid)){	// Если атрибут вкладки "видимый" и этот атрибут существует
-				$("#"+jwid).animate({height:this.clientHeight,width:this.clientWidth},100);
+				let clH = this.clientHeight;
+				let clW = this.clientWidth;
+				$("#"+jwid).animate({height:clH,width:clW},{duration:400, start:function(){
+					$('#p'+jwid).animate({top:clH},400);}});
 			}
-			var target = $('.jcarousel').jcarousel('target');
-		});*/
+		});
 		$('.jcarousel').jcarousel({wrap: 'circular'}); // Карусель будет циклична
 		$('.jcarousel-pagination').jcarouselPagination({ // Создание кнопок для выбора изображения
 			item: function itemfun(page, carouselItems) {
+				$('.jcarousel-pagination')[this['_carousel'][0].parentElement.id.substring(2,3)-1].id= 'p'+this['_carousel'][0].parentElement.id;
+				let pjwid = $('.jcarousel-pagination')[this['_carousel'][0].parentElement.id.substring(2,3)-1].id;
+				$('#'+pjwid).animate({top:$(".jcarousel-wrapper:eq("+(pjwid.substring(3,4)-1)+")").position()['top']},0);
 				if (page==1){return '<a href="#' +this['_carousel'][0].parentElement.id+page + '"class="active">' + page + '</a>';} // Установка кнопки "нажатой", если изображение - первое
-				return '<a href="#' +this['_carousel'][0].parentElement.id+page + '">' + page + '</a>';
+				return '<a href="#' +this['_carousel'][0].parentElement.id+page +'">' + page + '</a>';
 		  }
 		});
 		$('.jcarousel').jcarouselAutoscroll({ // Настройки автоскролла изображений
@@ -216,17 +233,24 @@ $(window).load(function(){
 				$(this).removeClass('active');
 			}
 		});
-		$('.jcarousel-pagination').jcarouselPagination('reloadCarouselItems');
 	})(FancyZ); 
 	$(function(){ //Отображение панели вкладок
 		$("#tabs").tabs();
-		$(".SecondForm").attr('class',$("#tabs-1").attr('class')+" SecondForm");
+		$(".SecondForm").attr('class',$("#tabs-1").attr('class')+" SecondForm"); // Добавление стиля jQuery-UI
 	});
 	function maxHeightOfImage(id){
 		let h = 0;
 		let im = $("div #jca"+id+" ul li img");
 		for (let i = 0; i<im.length;i++){ if (im[i].clientHeight>h){h = im[i].clientHeight;}}
+		$(".jcarousel-pagination")[id-1].style.margin = 0;
+		$(".jcarousel-pagination")[id-1].style.left = $(".jcarousel-wrapper").position()['left']-30;
 		return h;
+	}
+	function maxWidthOfImage(id){
+		let w = 0;
+		let im = $("div #jca"+id+" ul li img");
+		for (let i = 0; i<im.length;i++){ if (im[i].clientWidth>w){w = im[i].clientWidth;}}
+		return w;
 	}
 });
 $(".poster").ready(function(){
@@ -239,11 +263,9 @@ $(".poster").ready(function(){
 		posIm[i].style.left = p*100+"%";
 		bt[i].style.left = p*100+"%";
 	}
-	
 });
 $(function(){
 	$(".SecondForm").hide();
-	$(".SecondForm").attr('class',$("#tabs-1").attr('class')+" SecondForm");
 	$(".bt").click(function(){
 		if ($(".SecondForm").is(":hidden")){
 			$(".SecondForm").show(400);
@@ -258,6 +280,11 @@ $(function(){
 		}
 		
 	);
+	$(".poster").ready(function(){ // Ширина кнопки "Купить"
+		for (let i = 0; i<3; i++){
+			$("div .poster input")[i].style.width = $("div .poster img")[i].clientWidth;
+		}
+	});
 	
 });
 </script>
