@@ -80,6 +80,7 @@ img {
 <link rel="stylesheet" href="../../lib/jquery-ui-1.13.1.custom/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="../../lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script> 
+<script type="text/javascript" src="../../lib/datepicker-ru.js"></script><!--Локализация календаря-->
 <!--Подключили-->
 <body>
 <!--Первая форма-->
@@ -177,27 +178,27 @@ img {
 </div>
 <!--Вторая форма-->
 <div class="SecondForm">
-	<div id="SF">
-		<input type="button" style="float:right;margin:0 10" value = "X" id="close">
-		<p id="buyEl" style="margin:10 20 0;font-size:17;"></p>
+	<div id="dialog" title="Оформление заказа">
+		<b id="buyEl" style="margin:10 20 0;font-size:17;"></b>
 		<p id="price" style="margin:0 20 10;font-size:17;"></p>
 		<label for ="init" style="margin:0 5 10 20;">ФИО:</label>
 		<input type="text" size="30" id="init"><br><br>
 		<label for ="kol" style="margin:0 5 10 20;">Количество:</label>
 		<input type="number" value="0" step="1" min="0" max="99" id="kol">
 		<div id="slider" style="margin:10 50 30;"></div>
-		<label for ="data" style="margin:0 5 10 20;">Дата:</label>
+		<label for ="data" style="margin:0 5 10 20;">На какую дату:</label>
 		<input id="data"><br><br>
-		<label for ="select" style="margin:0 5 10 20;">Что-то:</label>
+		<label for ="select" style="margin:0 5 10 20;">Город:</label>
 		<select id="select" >
-			<option>Item 1</option>
-			<option>Item 2</option>
-			<option>Item 3</option>
-			<option>Item 4</option>
-			<option>Item 5</option>
+			<option>Москва</option>
+			<option>Санкт-Петербург</option>
+			<option>Казань</option>
+			<option>Уфа</option>
 		</select>
-		<br><label for ="search" style="margin:0 5 10 20;">Что-то 2:</label>
-		<input type="text" style="margin:20 0 0 0;" id="search"><br><br>
+		<br><label for ="search" style="margin:0 5 10 20;">Улица:</label>
+		<input type="text" style="margin:20 0 0 0;" id="search">
+		<label for ="home" style="margin:0 5 10 20;">Дом:</label>
+		<input type="text" style="margin:20 0 0 0;" size="2" maxlength="2" id="home"><br><br>
 		<label for ="promo" style="margin:0 5 10 20;">Промокод:</label>
 		<input type="text" size="10" id="promo">
 		<a href="#" title="Промокод - Pro10">?</a><br><br>
@@ -228,7 +229,6 @@ $("#a1,#a2,#a3").click(function(){ //При нажатии на вкладку
 	(function($){ //Запускается автоскроллинг выбранной вкладки
 		$('#jc'+jcIdForAS).jcarouselAutoscroll('start');
 	})(FancyZ);
-	$(".SecondForm").hide();
 	setTimeout(function() {(function($){ // paging
 		$('#pjw'+jcIdForAS.substring(1,2)).animate({top:$(".about:eq("+(jcIdForAS.substring(1,2)-1)+")").position()['top'] - $(".jcarousel-wrapper:eq("+(jcIdForAS.substring(1,2)-1)+")").position()['top']},0);
 	})(FancyZ);},0);
@@ -289,7 +289,6 @@ $(window).load(function(){
 	})(FancyZ); 
 	$(function(){ // Отображение панели вкладок
 		$("#tabs").tabs();
-		$(".SecondForm").attr('class',$("#tabs-1").attr('class')+" SecondForm"); // Добавление стиля jQuery-UI
 	});
 	function maxHeightOfImage(id){
 		let h = 0;
@@ -320,12 +319,17 @@ $(".poster").ready(function(){ // Установка расположение п
 $(function(){
 	var price = 0;
 	var prom = 1;
-	$(".SecondForm").hide();
+	var city = 'Москва';
+	var availableTags = ["Никольская","Большая Дмитровка", "Кузнецкий Мост", "Столешников", "Камергерский переулок","Театральный проезд","Охотный ряд","Вознесенский переулок"];
+	$('#dialog').dialog({
+		autoOpen: false,
+		minWidth: 550,
+		minHeight: 590,
+		close: function( event, ui ) {clear();},
+		hide: { effect: "fade", duration: 200 },
+		show: { effect: "fade", duration: 200 } 
+		});
 	$(".bt").click(function(){ // Нажатие на кнопку
-		if ($(".SecondForm").is(":hidden")){
-			$(".SecondForm").show(400);
-		}
-		else{$(".SecondForm").hide(400); clear();}
 		for (let i = 1;i<=3;i++){
 			let ahid = $("#tabs-"+i)[0].getAttribute("aria-hidden");
 			if ((ahid!="true") && (!!ahid)){	// Если атрибут вкладки "видимый" и этот атрибут существует
@@ -334,9 +338,7 @@ $(function(){
 				price = Price(i-1);
 			}
 		}
-	});
-	$("#close").click(function(){ // Закрытие формы
-		$(".SecondForm").hide(400); clear();
+		$('#dialog').dialog('open');
 	});
 	$(".poster").ready(function(){ // Ширина кнопки "Купить"
 		for (let i = 0; i<3; i++){
@@ -367,46 +369,51 @@ $(function(){
 		$('#slider').slider('value',$(this).val());
 		$('#summ').val(($(this).val()*price*prom).toFixed(2));
 	});
-	$("#data").datepicker();
-	$("#select").selectmenu({});
-	var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
+	$("#data").datepicker({
+		minDate: 1
+	});
+	$("#data").datepicker($.datepicker.regional["ru"]);
+	var cityM = [
+      "Никольская","Большая Дмитровка", "Кузнецкий Мост", "Столешников", "Камергерский переулок","Театральный проезд","Охотный ряд","Вознесенский переулок"
     ];
-    $( "#search" ).autocomplete({
-      source: availableTags, minLength: 3
-    });
+	var cityS = [
+      "Петровская набережная","Миллионная","Невский проспект","Набережная реки Фонтанки","Малая Конюшенная","Итальянская","Гороховая","Садовая"
+    ];
+	var cityK = [
+      "Дзержинского","Московская","Кремлевская","Островского","Рихарда Зорге","Пушкина","Саид-Галеева","Баумана"
+    ];
+	var cityU = [
+      "Революционная","Ленина","Достоевского","Посадская","Карла Маркса","Менделеева","Комсомольская","Зорге"
+    ];
+	$("#select").selectmenu({
+		change: function( event, data ) {
+			city = data.item.value;
+			switch(data.item.index){
+				case 0:availableTags = cityM;break;
+				case 1:availableTags = cityS;break;
+				case 2:availableTags = cityK;break;
+				case 3:availableTags = cityU;break;
+			}
+			console.log(data);
+		}
+	});
+	$("#search").focusin(function(){
+		$( "#search" ).autocomplete({
+			source: availableTags, minLength: 3
+		});
+	});
+    
 	$("#promo").change(function(){
 		if ($(this).val()=="Pro10"){prom = 0.9;$('#summ').val(($("#kol").val()*price*prom).toFixed(2));}
 		else {prom = 1;$('#summ').val(($("#kol").val()*price*prom).toFixed(2));}
 	});
 	$(".SecondForm div a").tooltip();
 	$('#buy').ready(function(){
-		console.log($(this).clientWidth);
+		
 	});
 	
 	function clear(){
-		$("input:not(#close, .bt, #buy)").val('');
+		$("input:not(.bt, #buy)").val('');
 		$("#kol").val('0');
 		$("#summ").val('0.00');
 		$('#slider').slider('value',0);
