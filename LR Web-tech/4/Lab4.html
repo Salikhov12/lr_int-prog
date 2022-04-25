@@ -187,7 +187,7 @@ img {
 		<input type="number" value="0" step="1" min="0" max="99" id="kol">
 		<div id="slider" style="margin:10 50 30;"></div>
 		<label for ="data" style="margin:0 5 10 20;">На какую дату:</label>
-		<input id="data"><br><br>
+		<input id="data" readonly><br><br>
 		<label for ="select" style="margin:0 5 10 20;">Город:</label>
 		<select id="select" >
 			<option>Москва</option>
@@ -205,6 +205,12 @@ img {
 		<label for ="summ" step="0.01" style="margin:0 5 10 20;">Итого:</label>
 		<input type="number" min="0" id="summ" value="0.00" readonly><span> рублей</span><br><br>
 		<input type="button" id="buy" value="Оформить" style="position:relative;width: 20%;	margin: 3% 40% 2%;height:50;">
+	</div>
+	<div id="confirm" title="Подтверждение">
+		<p>Вы уверены в оформлении заказа?</p>
+	</div>
+	<div id="alert" title="Заказ оформлен">
+		<p>Спасибо, заказ оформлен.</p>
 	</div>
 </div>
 <script>
@@ -328,7 +334,20 @@ $(function(){
 		close: function( event, ui ) {clear();},
 		hide: { effect: "fade", duration: 200 },
 		show: { effect: "fade", duration: 200 } 
-		});
+	});
+	$('#confirm').dialog({
+		autoOpen: false,
+		hide: { effect: "fade", duration: 200 },
+		show: { effect: "fade", duration: 200 },
+		buttons: [{text: "Да", click: function() {$('#alert').dialog('open');}},
+                  {text: "Нет", click: function() {$(this).dialog("close")}}]		
+	});
+	$('#alert').dialog({
+		autoOpen: false,
+		hide: { effect: "fade", duration: 200 },
+		show: { effect: "fade", duration: 200 },
+		buttons: [{text: "Ок", click: function() {$('#alert').dialog('close');$('#confirm').dialog('close');$('#dialog').dialog('close');}}]
+	});
 	$(".bt").click(function(){ // Нажатие на кнопку
 		for (let i = 1;i<=3;i++){
 			let ahid = $("#tabs-"+i)[0].getAttribute("aria-hidden");
@@ -408,8 +427,15 @@ $(function(){
 		else {prom = 1;$('#summ').val(($("#kol").val()*price*prom).toFixed(2));}
 	});
 	$(".SecondForm div a").tooltip();
-	$('#buy').ready(function(){
-		
+	$('#buy').click(function(){
+		// Проверка введенных данных
+		let ok = true;
+		if ($("#init").val().length<5){ok = false;$("#init").effect( "shake",{distance:7, times:1},200);}
+		if ($("#kol").val().length<1 || $("kol").val()=="0"){ok = false;$("#kol").effect( "shake",{distance:7, times:1},200);}
+		if ($("#data").val().length<10){ok = false;$("#data").effect( "shake",{distance:7, times:1},200);}
+		if ($("#search").val().length<5){ok = false;$("#search").effect( "shake",{distance:7, times:1},200);}
+		if ($("#home").val().length<1){ok = false;$("#home").effect( "shake",{distance:7, times:1},200);}
+		if (ok){$('#confirm').dialog('open');}
 	});
 	
 	function clear(){
