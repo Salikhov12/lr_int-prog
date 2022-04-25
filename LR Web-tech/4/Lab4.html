@@ -13,21 +13,27 @@ body{
 	margin: 1% 25% 0%;
 	position: relative;
 }
+@media (max-width:1540px){
+	.FirstForm{
+		width: 90%;
+		margin: 3% 4% 5%;
+		position: relative;
+	}
+}
 .SecondForm{
 	width: 50%;
 	margin: 1% 25% 5%;
-	position: relative;
+	position: sticky;
+	bottom: 0px;
 }
 .poster{
 	width:28%;
-	/*vertical-align: top;display: inline;*/ 
 	float:left;
 	height:500;
 	overflow: visible;
 }
 .imag{
 	width:72%;
-	/*display: inline;vertical-align: top;*/ 
 	float:right;
 }
 .about{
@@ -44,6 +50,21 @@ h2{
 	margin: 0;
 	position:relative;
 	top:-15;
+}
+.select{
+	margin:10 50 30;
+}
+label {
+	font-size:17;
+}
+input {
+	font-size:17;
+}
+span {
+	font-size:17;
+}
+img {
+	cursor: zoom-in;
 }
 </style>
 <!--Подключение библиотек-->
@@ -156,17 +177,33 @@ h2{
 </div>
 <!--Вторая форма-->
 <div class="SecondForm">
-	<div>
-		<p id="buyEl" style="margin:10 20 0;"></p>
-		<p id="price" style="margin:0 20 10;"></p>
+	<div id="SF">
+		<input type="button" style="float:right;margin:0 10" value = "X" id="close">
+		<p id="buyEl" style="margin:10 20 0;font-size:17;"></p>
+		<p id="price" style="margin:0 20 10;font-size:17;"></p>
 		<label for ="init" style="margin:0 5 10 20;">ФИО:</label>
 		<input type="text" size="30" id="init"><br><br>
 		<label for ="kol" style="margin:0 5 10 20;">Количество:</label>
-		<input type="number" step="1" min="0" max="99" id="kol">
-		
+		<input type="number" value="0" step="1" min="0" max="99" id="kol">
 		<div id="slider" style="margin:10 50 30;"></div>
-		
-		
+		<label for ="data" style="margin:0 5 10 20;">Дата:</label>
+		<input id="data"><br><br>
+		<label for ="select" style="margin:0 5 10 20;">Что-то:</label>
+		<select id="select" >
+			<option>Item 1</option>
+			<option>Item 2</option>
+			<option>Item 3</option>
+			<option>Item 4</option>
+			<option>Item 5</option>
+		</select>
+		<br><label for ="search" style="margin:0 5 10 20;">Что-то 2:</label>
+		<input type="text" style="margin:20 0 0 0;" id="search"><br><br>
+		<label for ="promo" style="margin:0 5 10 20;">Промокод:</label>
+		<input type="text" size="10" id="promo">
+		<a href="#" title="Промокод - Pro10">?</a><br><br>
+		<label for ="summ" step="0.01" style="margin:0 5 10 20;">Итого:</label>
+		<input type="number" min="0" id="summ" value="0.00" readonly><span> рублей</span><br><br>
+		<input type="button" id="buy" value="Оформить" style="position:relative;width: 20%;	margin: 3% 40% 2%;height:50;">
 	</div>
 </div>
 <script>
@@ -200,7 +237,12 @@ $(window).load(function(){
 	(function($){ // Основной код, в котором требуется другая версия jQuery
 		$('.jcarousel').on('jcarousel:create', function(event, carousel) { // Установка размеров блока при создании jcarousel
 			var jwid = this.parentElement.id;
+			let clH = this.clientHeight;
+			let clW = this.clientWidth;
 			$("#"+jwid).animate({height:maxHeightOfImage(parseInt(jwid.substring(2,3))),width:maxWidthOfImage(parseInt(jwid.substring(2,3)))},0);
+			if (($(".poster img:eq("+(jwid.substring(2,3)-1)+")")[0].clientHeight + 50)<(clH+$(".about:eq("+(jwid.substring(2,3)-1)+")")[0].clientHeight)){
+				$(".poster:eq("+(jwid.substring(2,3)-1)+")").animate({height:clH+$(".about:eq("+(jwid.substring(2,3)-1)+")")[0].clientHeight},400);}
+			else{$(".poster:eq("+(jwid.substring(2,3)-1)+")").animate({height:($(".poster img:eq("+(jwid.substring(2,3)-1)+")")[0].clientHeight + 50)},400);}
 		});
 		$('.jcarousel').on('jcarousel:visiblein', 'li', function(event, carousel) { // Установка размеров блока, когда изображение становится видимым
 			var hid = this.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("aria-hidden");
@@ -276,22 +318,26 @@ $(".poster").ready(function(){ // Установка расположение п
 	}
 });
 $(function(){
+	var price = 0;
+	var prom = 1;
 	$(".SecondForm").hide();
-	$(".bt").click(function(){
+	$(".bt").click(function(){ // Нажатие на кнопку
 		if ($(".SecondForm").is(":hidden")){
 			$(".SecondForm").show(400);
 		}
-		else{$(".SecondForm").hide(400);}
+		else{$(".SecondForm").hide(400); clear();}
 		for (let i = 1;i<=3;i++){
 			let ahid = $("#tabs-"+i)[0].getAttribute("aria-hidden");
 			if ((ahid!="true") && (!!ahid)){	// Если атрибут вкладки "видимый" и этот атрибут существует
-				$(".poster")[i-1].style.height = $(".SecondForm").position()['top'] - $(".poster:eq("+(i-1)+")").position()['top'] - 20;
 				$("#buyEl").text($("h2:eq("+(i-1)+")").text());
 				$("#price").text("Цена: "+Price(i-1)+"руб.");
+				price = Price(i-1);
 			}
 		}
-	}
-	);
+	});
+	$("#close").click(function(){ // Закрытие формы
+		$(".SecondForm").hide(400); clear();
+	});
 	$(".poster").ready(function(){ // Ширина кнопки "Купить"
 		for (let i = 0; i<3; i++){
 			$("div .poster input")[i].style.width = $("div .poster img")[i].clientWidth;
@@ -305,24 +351,66 @@ $(function(){
 			default: return 999;
 		}
 	}
-	$(function(){
-		$('#slider').slider({
-			animate: 'fast',
-			min: 0,
-			max: 99,
-			value: 1,
-			slide: function( event, ui ) {
-				$('#kol').val(ui['value']);
-			}
-		});
-		$("#kol").change(function(){
-			if ($(this).val()>99){$(this).val(99)}
-			if ($(this).val()<0){$(this).val(0)}
-			$('#slider').slider('value',$(this).val());
-		});
+	$('#slider').slider({
+		animate: 'fast',
+		min: 0,
+		max: 99,
+		value: 0,
+		slide: function( event, ui ) {
+			$('#kol').val(ui['value']);
+			$('#summ').val((ui['value']*price*prom).toFixed(2));
+		}
 	});
-
-
+	$("#kol").change(function(){
+		if ($(this).val()>99){$(this).val(99)}
+		if ($(this).val()<0){$(this).val(0)}
+		$('#slider').slider('value',$(this).val());
+		$('#summ').val(($(this).val()*price*prom).toFixed(2));
+	});
+	$("#data").datepicker();
+	$("#select").selectmenu({});
+	var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#search" ).autocomplete({
+      source: availableTags, minLength: 3
+    });
+	$("#promo").change(function(){
+		if ($(this).val()=="Pro10"){prom = 0.9;$('#summ').val(($("#kol").val()*price*prom).toFixed(2));}
+		else {prom = 1;$('#summ').val(($("#kol").val()*price*prom).toFixed(2));}
+	});
+	$(".SecondForm div a").tooltip();
+	$('#buy').ready(function(){
+		console.log($(this).clientWidth);
+	});
+	
+	function clear(){
+		$("input:not(#close, .bt, #buy)").val('');
+		$("#kol").val('0');
+		$("#summ").val('0.00');
+		$('#slider').slider('value',0);
+	}
 });
 </script>
 </html>
