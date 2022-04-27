@@ -37,7 +37,8 @@ $.get( "map.txt", //Загрузка карты
 			{},
 			function(data) {
 				map = [];
-				let col = data.substr(0,data.indexOf("\n")).length;
+				//let col = data.substr(0,data.indexOf("\n")).length;
+				let col = 26;
 				for (let i = 0; i < col; i++) {
 					map[i] = new Array();
 				}
