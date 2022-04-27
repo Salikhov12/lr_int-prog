@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>
+Задание 1. Салихов Р.Н.
+</title>
+<style>
+body{background:#75c1ff;}
+</style>
+</head>
+<body>
+<input type="button" id="go" value="go">
+<img id="cat" src="../../img/catballoon.gif" style="position:relative"><br>
+<script src="../../lib/jquery-3.6.0.min.js"></script>
+<script>
+var movm = 0;
+$(document).ready(function(){
+
+	$("#go").click(function (){
+		if (movm == 0){
+		 movm = 4;
+		 moveT(4);
+		}
+		else{movm = 0;}
+	});
+	
+	$(document).keyup(function(k){
+		if (k.key=="ArrowUp" || k.keyCode==38){
+			movm = 1;
+			moveT(1);
+		}
+		if (k.key=="ArrowDown" || k.keyCode==40){
+			movm = 2;
+			moveT(2);
+		}
+		if (k.key=="ArrowLeft" || k.keyCode==37){
+			movm = 3;
+			moveT(3);
+		}
+		if (k.key=="ArrowRight" || k.keyCode==39){
+			movm = 4;
+			moveT(4);
+		}
+	});
+	function moveT(where){
+		switch(where){
+			case 1:$("#cat").animate({top:"-=100"},100);setTimeout(function() {if (movm == 1) {moveT(1);}},150);break;
+			case 2:$("#cat").animate({top:"+=100"},100);setTimeout(function() {if (movm == 2) {moveT(2);}},150);break;
+			case 3:$("#cat").animate({right:"+=100"},100);setTimeout(function() {if (movm == 3) {moveT(3);}},150);break;
+			case 4:$("#cat").animate({right:"-=100"},100);setTimeout(function() {if (movm == 4) {moveT(4);}},150);break;
+		}
+	}
+});
+</script>
+<input type="button" value="Назад" onclick="location.href='../../index.php'"></input>
+</body>
+</html>

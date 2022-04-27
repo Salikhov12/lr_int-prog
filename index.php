@@ -25,4 +25,6 @@
 <br>Лабораторная работа №4
 <li><a href="LR Web-tech/4/lab4_pr.html">Примеры</a>
 <li><a href="LR Web-tech/4/Lab4.html">Задание 1</a>
+<br>Лабораторная работа №5
+<li><a href="LR Web-tech/5/Lab5.html">Задание 1</a>
 </ul>
