@@ -24,101 +24,145 @@ body{background:#75c1ff;}
 <script src="../../lib/jquery-3.6.0.min.js"></script>
 <script src="../../lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script> 
 <script>
-var map = [
-[1,1,1,1,1,1,1],
-[1,0,0,0,0,1,1],
-[1,1,1,0,1,1,1],
-[1,0,0,0,1,1,1],
-[1,0,1,1,1,1,1],
-[1,0,0,0,0,2,1],
-[1,1,1,1,1,1,1]
-];
-console.log(map.length);
-console.log(map[0].length);
+
 var movm = 0; //Куда двигается. 1-вверх, 2-вниз, 3-влево, 4-вправо
 var winh = $(window).height(); //Высота окна
 var winw = $(window).width(); //Ширина окна
+var queMov = [];
+var where = 0;
 $(document).ready(function(){
-	
-	for (let i=0;i<map.length;i++){
-		for (let j=0;j<map[0].length;j++){
-			switch(map[i][j]){
-				case 0:$("<img src='../../img/floor.jpg' style='position:static'>").appendTo("div");break;
-				case 1:$("<img src='../../img/wall.jpg' style='position:static'>").appendTo("div");break;
-				case 2:$("<img src='../../img/floor.jpg' style='position:static'>").appendTo("div");
-					$("#cat")[0].style.top=32*(i+1);$("#cat")[0].style.right=(-32*j);break;
+	var map;
+$.get( "map.txt", //Загрузка карты
+			{},
+			function(data) {
+				map = [];
+				let col = data.indexOf("\n");
+				for (let i = 0; i < col; i++) {
+					map[i] = new Array();
+				}
+				let str = 1;
+				sim=0;
+				while (sim<data.length){
+					for (let i = 0;i<col-1;i++){
+						let check = true;
+						while (check){
+							if (data.substring(sim,sim+1)!="\n"&&data.substring(sim,sim+1)!="\r"){
+								check=false;
+							}
+							else{sim++;}
+						}
+						map[str-1][i] = data.substring(sim,sim+1);
+						sim++;
+					}
+					str++;
+				}
+				buildmap();
 			}
+	);
+	function buildmap(){
+		console.log(map[1][1]);
+		for (let i=0;i<map.length;i++){
+			for (let j=0;j<map[0].length;j++){
+			console.log(parseInt(map[i][j]));
+				switch(parseInt(map[i][j])){
+					case 0:$("<img src='../../img/floor.jpg' style='position:static'>").appendTo("div");break;
+					case 1:$("<img src='../../img/wall.jpg' style='position:static'>").appendTo("div");break;
+					case 2:$("<img src='../../img/floor.jpg' style='position:static'>").appendTo("div");
+						$("#cat")[0].style.top=32*(i+1);$("#cat")[0].style.right=(-32*j);break;
+				}
+			}
+			$("<br>").appendTo("div");
 		}
-		$("<br>").appendTo("div");
 	}
-	
-	$("#go").click(function (){
-		if (movm == 0){
-		 movm = 4;
-		 mbwall(4);
-		}
-		else{movm = 0;}
-	});
 	
 	$(document).keyup(function(k){
 		if (k.key=="ArrowUp" || k.keyCode==38){
 			$("#cat").removeClass();
 			$("#cat").addClass('rotU');
-			movm = 1;
-			mbwall(1);
+			queMov[0]=1;
 		}
 		if (k.key=="ArrowDown" || k.keyCode==40){
 			$("#cat").removeClass();
 			$("#cat").addClass('rotD');
-			movm = 2;
-			mbwall(2);
+			queMov[0]=2;
 		}
 		if (k.key=="ArrowLeft" || k.keyCode==37){
 			$("#cat").removeClass();
 			$("#cat").addClass('rotL');
-			movm = 3;
-			mbwall(3);
+			queMov[0]=3;
 		}
 		if (k.key=="ArrowRight" || k.keyCode==39){
 			$("#cat").removeClass();
-			movm = 4;
-			mbwall(4);
+			queMov[0]=4;
 		}
 	});
-	function moveT(where){
-		if(($("#cat").position()['top']<$("#cat")[0].clientWidth)&&(where==1)){
-			where=0;}
-		if(((winh-$("#cat").position()['top'])<$("#cat")[0].clientWidth)&&(where==2)){
-			where=0;}
-		if(($("#cat").position()['left']<$("#cat")[0].clientWidth)&&(where==3)){
-			where=0;}
-		if((winw-$("#cat").position()['left']<$("#cat")[0].clientWidth)&&(where==4)){
-			where=0;}	
-		switch(where){
-			case 1:$("#cat").animate({top:"-=32"},100);setTimeout(function() {if (movm == 1) {mbwall(1);}},100);break;
-			case 2:$("#cat").animate({top:"+=32"},100);setTimeout(function() {if (movm == 2) {mbwall(2);}},100);break;
-			case 3:$("#cat").animate({right:"+=32"},100);setTimeout(function() {if (movm == 3) {mbwall(3);}},100);break;
-			case 4:$("#cat").animate({right:"-=32"},100);setTimeout(function() {if (movm == 4) {mbwall(4);}},100);break;
-			default: $("#cat").effect( "shake",{distance:3, times:1},100);
+	
+	setInterval(function(){
+		if (queMov.length==1){
+			console.log(queMov+" if = 1");
+			let posX = Math.round($("#cat").position()['left']/32);
+			let posY = Math.round($("#cat").position()['top']/32)-1;
+			switch (queMov[0]){
+				case 1: if (map[posY-1][posX]==1) {queMov[0]=0;} break;
+				case 2: if (map[posY+1][posX]==1) {queMov[0]=0;} break;
+				case 3: if (map[posY][posX-1]==1) {queMov[0]=0;} break;
+				case 4: if (map[posY][posX+1]==1) {queMov[0]=0;} break;
+			}
+			switch(queMov[0]){
+				case 0:$("#cat").effect( "shake",{distance:1, times:0},100);queMov[0]=5;break;
+				case 1:$("#cat").animate({top:"-=32"},{duration: 100, easing: "linear" });break;
+				case 2:$("#cat").animate({top:"+=32"},{duration: 100, easing: "linear" });break;
+				case 3:$("#cat").animate({right:"+=32"},{duration: 100, easing: "linear" });break;
+				case 4:$("#cat").animate({right:"-=32"},{duration: 100, easing: "linear" });break;
+			}
 		}
-	}
-	function mbwall(where){
-		let posX = Math.round($("#cat").position()['left']/32);
-		let posY = Math.round($("#cat").position()['top']/32)-1;
-		console.log(posX+" "+posY);
-		console.log(map[posY][posX]);
-		console.log(map[posY-1][posX]);
-		console.log(map[posY+1][posX]);
-		console.log(map[posY][posX-1]);
-		console.log(map[posY][posX+1]);
-		console.log(where+"asds");
-		switch (where){
-			case 1: if (map[posY-1][posX]==1) {moveT(0);}else{moveT(where);} break;
-			case 2: if (map[posY+1][posX]==1) {moveT(0);}else{moveT(where);} break;
-			case 3: if (map[posY][posX-1]==1) {moveT(0);}else{moveT(where);} break;
-			case 4: if (map[posY][posX+1]==1) {moveT(0);}else{moveT(where);} break;
+		if (queMov.length>1){
+			while(queMov.length>2){
+				queMov.shift();
+			}
+			
+			let posX = Math.round($("#cat").position()['left']/32);
+			let posY = Math.round($("#cat").position()['top']/32)-1;
+			switch (queMov[0]){
+				case 1: if (map[posY-1][posX]==1) {queMov[0]=0;} break;
+				case 2: if (map[posY+1][posX]==1) {queMov[0]=0;} break;
+				case 3: if (map[posY][posX-1]==1) {queMov[0]=0;} break;
+				case 4: if (map[posY][posX+1]==1) {queMov[0]=0;} break;
+			}
+			switch(queMov[0]){
+				case 0:$("#cat").effect( "shake",{distance:1, times:0},60);queMov[0]=5;break;
+				case 1:$("#cat").animate({top:"-=32"},100);break;
+				case 2:$("#cat").animate({top:"+=32"},100);break;
+				case 3:$("#cat").animate({right:"+=32"},100);break;
+				case 4:$("#cat").animate({right:"-=32"},100);break;
+			}
+			queMov.shift();
 		}
-	}
+	
+	},110);
+	
+	/*setInterval(function(){
+		if (queMov.length>0){
+			console.log(queMov);
+			let posX = Math.round($("#cat").position()['left']/32);
+			let posY = Math.round($("#cat").position()['top']/32)-1;
+			switch (queMov[0]){
+				case 1: if (map[posY-1][posX]==1) {queMov[0]=0;} break;
+				case 2: if (map[posY+1][posX]==1) {queMov[0]=0;} break;
+				case 3: if (map[posY][posX-1]==1) {queMov[0]=0;} break;
+				case 4: if (map[posY][posX+1]==1) {queMov[0]=0;} break;
+			}
+			switch(queMov[0]){
+				case 1:$("#cat").animate({top:"-=32"},100);if (queMov[queMov.length-1] == 1) {queMov.push(1);};break;
+				case 2:$("#cat").animate({top:"+=32"},100);if (queMov[queMov.length-1] == 2) {queMov.push(2);};break;
+				case 3:$("#cat").animate({right:"+=32"},100);if (queMov[queMov.length-1] == 3) {queMov.push(3);};break;
+				case 4:$("#cat").animate({right:"-=32"},100);if (queMov[queMov.length-1] == 4) {queMov.push(4);};break;
+				default: $("#cat").effect( "shake",{distance:3, times:1},50);
+			}
+			queMov.shift();
+		}
+	},200);*/
+	
 });
 </script>
 <input type="button" value="Назад" onclick="location.href='../../index.php'"></input>
