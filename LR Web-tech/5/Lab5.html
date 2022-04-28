@@ -20,7 +20,7 @@ body{background:#75c1ff;}
 <body style="margin:0;">
 <!--<input type="button" id="go" value="go">-->
 <div>
-<img id="cat" src="../../img/pacman.gif" class="rotated" style="position:relative"><br>
+<img id="cat" src="../../img/pacman.gif" class="rotated" style="position:relative"><span id="score">Счёт:0</span><br>
 </div>
 <script src="../../lib/jquery-3.6.0.min.js"></script>
 <script src="../../lib/jquery-ui-1.13.1.custom/jquery-ui.js"></script> 
@@ -71,6 +71,7 @@ $.get( "map.txt", //Загрузка карты
 					case 1:$("<img src='../../img/wall.jpg' style='position:static'>").appendTo("div");break;
 					case 2:$("<img src='../../img/floor.jpg' style='position:static'>").appendTo("div");
 						$("#cat")[0].style.top=32*(i+1);$("#cat")[0].style.right=(-32*j);break;
+					case 3:$("<img src='../../img/floorPoint.jpg' id='"+i+"-"+j+"' style='position:static'>").appendTo("div");break;
 				}
 			}
 			$("<br>").appendTo("div");
@@ -105,10 +106,18 @@ $.get( "map.txt", //Загрузка карты
 			let posX = Math.round($("#cat").position()['left']/32);
 			let posY = Math.round($("#cat").position()['top']/32)-1;
 			switch (queMov[0]){
-				case 1: if (map[posY-1][posX]==1) {queMov[0]=0;} break;
-				case 2: if (map[posY+1][posX]==1) {queMov[0]=0;} break;
-				case 3: if (map[posY][posX-1]==1) {queMov[0]=0;} break;
-				case 4: if (map[posY][posX+1]==1) {queMov[0]=0;} break;
+				case 1: if (map[posY-1][posX]==1) {queMov[0]=0;}if (map[posY-1][posX]==3&&$("#"+(posY-1)+"-"+posX).attr('src')=='../../img/floorPoint.jpg') 
+					{$("#"+(posY-1)+"-"+posX).attr('src','../../img/floor.jpg');
+					$("#score").text("Счёт:"+(parseInt($("#score").text().substring(5))+100));} break;
+				case 2: if (map[posY+1][posX]==1) {queMov[0]=0;}if (map[posY+1][posX]==3&&$("#"+(posY+1)+"-"+posX).attr('src')=='../../img/floorPoint.jpg') 
+					{$("#"+(posY+1)+"-"+posX).attr('src','../../img/floor.jpg');
+					$("#score").text("Счёт:"+(parseInt($("#score").text().substring(5))+100));} break;
+				case 3: if (map[posY][posX-1]==1) {queMov[0]=0;}if (map[posY][posX-1]==3&&$("#"+posY+"-"+(posX-1)).attr('src')=='../../img/floorPoint.jpg') 
+					{$("#"+posY+"-"+(posX-1)).attr('src','../../img/floor.jpg');
+					$("#score").text("Счёт:"+(parseInt($("#score").text().substring(5))+100));} break;
+				case 4: if (map[posY][posX+1]==1) {queMov[0]=0;}if (map[posY][posX+1]==3&&$("#"+posY+"-"+(posX+1)).attr('src')=='../../img/floorPoint.jpg') 
+					{$("#"+posY+"-"+(posX+1)).attr('src','../../img/floor.jpg');
+					$("#score").text("Счёт:"+(parseInt($("#score").text().substring(5))+100));} break;
 			}
 			switch(queMov[0]){
 				case 0:$("#cat").effect( "shake",{distance:1, times:0},100);queMov[0]=5;break;
