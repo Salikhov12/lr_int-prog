@@ -1,0 +1,13 @@
+body{background:#75c1ff;}
+.rotD{
+	transform: rotate(90deg);
+}
+.rotU{
+	transform: rotate(270deg);
+}
+.rotL{
+	transform: scale(-1, 1);
+}
+body{
+	margin:0;
+}
