@@ -1,4 +1,8 @@
-body{background:#75c1ff;}
+body{background:#0d0114;}
+#score{
+	color: white;
+	font-size: 22;
+}
 .rotD{
 	transform: rotate(90deg);
 }
@@ -10,4 +14,14 @@ body{background:#75c1ff;}
 }
 body{
 	margin:0;
+}
+.message{
+	position:relative;
+	width:290px;
+	color: white;
+	font-size: 22;
+	background: #000000bd;
+	text-align: center;
+	border: solid 1px white;
+	border-radius: 7px;
 }
