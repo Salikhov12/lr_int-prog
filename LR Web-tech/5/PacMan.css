@@ -3,6 +3,10 @@ body{background:#0d0114;}
 	color: white;
 	font-size: 22;
 }
+.rec{
+	color: white;
+	font-size: 18;
+}
 .rotD{
 	transform: rotate(90deg);
 }
@@ -30,6 +34,15 @@ body{
 	white-space: pre-line;
 	height: 40px;
 	margin: 5px;
+	color: white;
+	background: #000000bd;
+	font-size: 16;
+}
+.lvlb{
+	width:150px;
+	white-space: pre-line;
+	height: 30px;
+	margin: 1px;
 	color: white;
 	background: #000000bd;
 	font-size: 16;
