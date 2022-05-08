@@ -16,6 +16,9 @@
 	var posXE;
 	var posYE;
 	var varcoll;
+	var varBegin;
+	let pacmanmove;
+	let ghostmove;
 	
 	$(document).ready(function(){
 		var map;
@@ -49,7 +52,8 @@
 		);
 		
 		function buildgame(){
-			$("<img id='pacman' src='../../img/pacman.gif' class='rotated' style='position:relative'><img id='ghost' src='../../img/ghost.gif' style='position:relative'><br><span id='score'>Счёт:0</span><br>").appendTo("div#game");
+			GO=0;
+			$("<img id='pacman' src='../../img/pacman.gif' class='rotated' style='position:relative'><img id='ghost' src='../../img/ghost.gif' style='position:relative'><br><span style='display: inline-block;width:115px' id='score'>Счёт:0</span><input type='button' value='Пауза' id='pause' style='position:relative' class='b'><br>").appendTo("div#game");
 			for (let i=0;i<map.length;i++){
 				for (let j=0;j<map[0].length;j++){
 					switch(parseInt(map[i][j])){
@@ -62,6 +66,7 @@
 				}
 				$("<br>").appendTo("div#game");
 			}
+			$("#pause")[0].style.left= map[0].length * 32-150-115-10;
 			maxL = $("div#game img").last().position()['left'];
 			maxT = $("div#game img").last().position()['top'];
 			
@@ -69,22 +74,51 @@
 			
 			$("<input type='button' value='STOP' id='stopgame'>").appendTo("div#game"); // Кнопка остановки персонажей
 			$("<p id='beginText' class='message' style='top:"+(-maxT/2)+";left:"+((maxL+32-290)/2)+";'>Нажмите 🢁, 🢂, 🢃 или 🢀, чтобы начать</p>").appendTo("div#game");
-			$("<p id='GameOver' class='message' style='top:"+(-maxT/2)+";left:"+((maxL+32-290)/2)+";'>Игра окончена</p>").appendTo("div#game");
-			$("<p id='Win' class='message' style='top:"+(-maxT/2)+";left:"+((maxL+32-290)/2)+";'>Уровень завершен</p>").appendTo("div#game");
+			$("<div id='GameOver' class='message' style='padding:5;top:"+(-maxT/2)+";left:"+((maxL+32-290)/2)+";'>Игра окончена<br><input class='b again' type='button' value='Заново'><br><input class='b' type='button' id='exit' value='Выход'></div>").appendTo("div#game");
+			$("<div id='Win' class='message' style='padding:5;top:"+((-maxT-95)/2)+";left:"+((maxL+32-290)/2)+";'>Уровень завершен<br><input class='b' id='next' type='button' value='Следующий уровень'><br><input class='b again' type='button' value='Заново'></div>").appendTo("div#game");
+			$("<div id='pausebox' class='message' style='padding:5;top:"+((-maxT-195)/2)+";left:"+((maxL+32-290)/2)+";'>Пауза<br><input class='b' id='continue' type='button' value='Продолжить'><br><input class='b again' type='button' value='Заново'></div>").appendTo("div#game");
 			$("#GameOver").fadeOut(0);
 			$("#Win").fadeOut(0);
+			$("#pausebox").fadeOut(0);
 			$("#stopgame").click(function(){ // Остановка персонажей
 				stopGame(false);
 			});
-
+			varBegin = setInterval(funBegin,2000);
 		}
 		
+		$("div#game").on("click","#Win .again, #GameOver .again, #pausebox .again",function(){
+			$("div#game").empty();
+			$("div#Win").remove();
+			$("div#GameOver").remove();
+			clearInterval(varBegin);
+			buildgame();	
+		});
+		$("div#game").on("click","#GameOver input#exit",function(){
+			$("#GameOver").fadeOut(0);
+		});
+		$("div#game").on("click","#pause",function(){
+			if(!$("#beginText").is(":visible")&&!$("#Win").is(":visible")&&!$("#GameOver").is(":visible")){
+				$("#pausebox").fadeIn(200);
+				clearInterval(pacmanmove);
+				clearInterval(ghostmove);
+				clearInterval(varcoll);	
+			}
+			
+		});
+		$("div#game").on("click","#pausebox input#continue",function(){
+			$("#pausebox").fadeOut(50);
+			varcoll = setInterval(colus,30);
+			pacmanmove = setInterval(pacmanm,120);
+			ghostmove = setInterval(ghostm,210);
+		});
 		
 		function stopGame(lose){
 			queMov.length = 0;
 			enemy = 0;
 			$("#pacman").stop(true,false);
 			$("#ghost").stop(true,false);
+			clearInterval(pacmanmove);
+			clearInterval(ghostmove);
 			clearInterval(varcoll);
 			if (lose){
 				$("#GameOver").fadeIn(0);
@@ -105,6 +139,8 @@
 					clearInterval(varBegin);
 					enemy=1;
 					varcoll = setInterval(colus,30);
+					pacmanmove = setInterval(pacmanm,120);
+					ghostmove = setInterval(ghostm,210);
 			}
 			
 		}
@@ -118,14 +154,13 @@
 			}
 		});
 		var side = 1;
-		var varBegin = setInterval(funBegin,2000);
 		
 		function funBegin(){
 			$("#beginText").fadeOut(200);
 			$("#beginText").fadeIn(200);
 		}
 		
-		setInterval(function(){
+		function pacmanm(){
 			if (!document.hidden){
 				if (GO==0){stopGame(false);} //$("div").empty();buildgame();
 				else{
@@ -158,8 +193,11 @@
 					}
 				}
 			}
-		},120);
-		setInterval(function(){
+		}
+		//setInterval(function(){
+			
+		//},120);
+		function ghostm(){
 			if (!document.hidden){
 				if (enemy == 1){
 					posXE = Math.round(($("#ghost").position()['left']-$("#0-0").position()['left'])/32);
@@ -193,7 +231,10 @@
 					}
 				}
 			}
-		},210);
+		}
+		//setInterval(function(){
+			
+		//},210);
 		
 		function movE(){
 			return (Math.floor(Math.random()*4)+1);

@@ -25,3 +25,12 @@ body{
 	border: solid 1px white;
 	border-radius: 7px;
 }
+.b{
+	width:150px;
+	white-space: pre-line;
+	height: 40px;
+	margin: 5px;
+	color: white;
+	background: #000000bd;
+	font-size: 16;
+}
