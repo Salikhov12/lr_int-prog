@@ -125,6 +125,17 @@
 			side = 1;
 			buildgame();	
 		});
+		$("div#game").on("click","#Win #next",function(){
+			$("div#game").empty();
+			$("div#Win").remove();
+			$("div#GameOver").remove();
+			clearInterval(varBegin);
+			clearInterval(pacmanmove);
+			clearInterval(ghostmove);
+			clearInterval(varcoll);	
+			side = 1;
+			getmap(parseInt($('input[disabled]')[0].nextSibling.id.substring(3))+1);	
+		});
 		$("div#game").on("click","#GameOver input#exit",function(){
 			$("#GameOver").fadeOut(0);
 		});
@@ -155,7 +166,7 @@
 			if (lose){
 				$("#GameOver").fadeIn(0);
 			}
-			else{$("#Win").fadeIn(0);}
+			else{$("#Win").fadeIn(0);$("#next")[0].removeAttribute("disabled", "");if ($('input[disabled]')[0].nextSibling.id=="lvl5"){$("#next")[0].setAttribute("disabled", "");}}
 			if (parseInt($("#score").text().substring(5))>parseInt($("#"+$('input[disabled]')[0].nextSibling.id).text().substring(8))){
 				document.cookie = $('input[disabled]')[0].nextSibling.id+"="+parseInt($("#score").text().substring(6))+";";
 				$("#"+$('input[disabled]')[0].nextSibling.id).text("Рекорд: "+(parseInt($("#score").text().substring(6))));
