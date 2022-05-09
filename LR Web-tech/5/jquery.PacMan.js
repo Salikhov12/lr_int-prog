@@ -88,10 +88,10 @@
 				$("<br>").appendTo("div#game");
 			}
 			$("#pause")[0].style.left= map[0].length * 32-150-115-10;
-			maxL = $("div#game img").last().position()['left'];
+			maxL = 768;
 			maxT = $("div#game img").last().position()['top'];
 			
-			$("div#game")[0].style.width=800;
+			$("div#game")[0].style.width=maxL + 32;
 			
 			//$("<input type='button' value='STOP' id='stopgame'>").appendTo("div#game"); // Кнопка остановки персонажей
 			$("<p id='beginText' class='message' style='top:"+(-maxT/2)+";left:"+((maxL+32-290)/2)+";'>Нажмите 🢁, 🢂, 🢃 или 🢀, чтобы начать</p>").appendTo("div#game");
