@@ -25,7 +25,13 @@
 	$(document).ready(function(){
 		var map;
 		var GO=0;
-		if (first==0){getmap(1)};
+		if (first==0){
+			if (document.cookie.indexOf("lastlvl")==-1){
+				getmap(1)}
+			else{
+				getmap(parseInt(document.cookie.substring(document.cookie.indexOf("lastlvl")+8,document.cookie.indexOf("lastlvl")+9)));
+			}
+		};
 		
 		function getmap(lvl){
 			$.get( "lvl"+lvl+".txt", //Загрузка карты
@@ -54,7 +60,7 @@
 					}
 					buildgame();
 					if(first==0){
-						$("<div id='lvlpick' style='position:absolute;left:"+(maxL+40)+";top:"+$("#0-0").position()['top']+";width: 320;'></div>").insertAfter("div#game");
+						$("<div id='lvlpick' style='position:relative;top:"+$("#0-0").position()['top']+";width: 320;'></div>").insertAfter("div#game");
 						buildLvlPick(5);
 					}
 					$(".lvlb").each(function(){
@@ -102,7 +108,7 @@
 		}
 		
 		$($("div#game")[0].parentElement).on("click",".lvlb",function(){
-			console.log(this.value);
+			document.cookie = "lastlvl="+this.value.substring(8);
 			$("div#game").empty();
 			$("div#Win").remove();
 			$("div#GameOver").remove();
@@ -163,14 +169,18 @@
 			clearInterval(pacmanmove);
 			clearInterval(ghostmove);
 			clearInterval(varcoll);
+			let lvlid = $('#lvlpick input[disabled]')[0].nextSibling.id;
+			if (parseInt($("#score").text().substring(5))>parseInt($(("#lvlpick #"+lvlid)).text().substring(8))){
+				console.log(parseInt($("#score").text().substring(5)));
+				console.log(parseInt($("#"+$('#lvlpick input[disabled]')[0].nextSibling.id).text().substring(8)));
+				document.cookie = $('input[disabled]')[0].nextSibling.id+"="+parseInt($("#score").text().substring(6))+";";
+				$("#"+$('input[disabled]')[0].nextSibling.id).text("Рекорд: "+(parseInt($("#score").text().substring(6))));
+			}
 			if (lose){
 				$("#GameOver").fadeIn(0);
 			}
 			else{$("#Win").fadeIn(0);$("#next")[0].removeAttribute("disabled", "");if ($('input[disabled]')[0].nextSibling.id=="lvl5"){$("#next")[0].setAttribute("disabled", "");}}
-			if (parseInt($("#score").text().substring(5))>parseInt($("#"+$('input[disabled]')[0].nextSibling.id).text().substring(8))){
-				document.cookie = $('input[disabled]')[0].nextSibling.id+"="+parseInt($("#score").text().substring(6))+";";
-				$("#"+$('input[disabled]')[0].nextSibling.id).text("Рекорд: "+(parseInt($("#score").text().substring(6))));
-			}
+			
 			console.log($("#"+$('input[disabled]')[0].nextSibling.id));
 		}
 		

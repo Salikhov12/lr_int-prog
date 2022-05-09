@@ -1,7 +1,13 @@
-body{background:#0d0114;}
+body{background:#0d0114;margin:0;position: fixed;}
 #score{
 	color: white;
 	font-size: 22;
+}
+div#cell{
+	display:inline-flex;
+	flex-direction: row;
+	position:relative;
+	left:50%;
 }
 .rec{
 	color: white;
@@ -15,9 +21,6 @@ body{background:#0d0114;}
 }
 .rotL{
 	transform: scale(-1, 1);
-}
-body{
-	margin:0;
 }
 .message{
 	position:relative;
