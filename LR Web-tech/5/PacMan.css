@@ -1,27 +1,21 @@
 body{background:#0d0114;margin:0;position: fixed;}
 #score{
 	color: white;
-	font-size: 22;
-}
+	font-size: 22;}
 div#cell{
 	display:inline-flex;
 	flex-direction: row;
 	position:relative;
-	left:50%;
-}
+	left:50%;}
 .rec{
 	color: white;
-	font-size: 18;
-}
+	font-size: 18;}
 .rotD{
-	transform: rotate(90deg);
-}
+	transform: rotate(90deg);}
 .rotU{
-	transform: rotate(270deg);
-}
+	transform: rotate(270deg);}
 .rotL{
-	transform: scale(-1, 1);
-}
+	transform: scale(-1, 1);}
 .message{
 	position:relative;
 	width:290px;
@@ -30,8 +24,7 @@ div#cell{
 	background: #000000bd;
 	text-align: center;
 	border: solid 1px white;
-	border-radius: 7px;
-}
+	border-radius: 7px;}
 .b{
 	width:150px;
 	white-space: pre-line;
@@ -39,8 +32,7 @@ div#cell{
 	margin: 5px;
 	color: white;
 	background: #000000bd;
-	font-size: 16;
-}
+	font-size: 16;}
 .lvlb{
 	width:150px;
 	white-space: pre-line;
@@ -48,5 +40,4 @@ div#cell{
 	margin: 1px;
 	color: white;
 	background: #000000bd;
-	font-size: 16;
-}
+	font-size: 16;}
