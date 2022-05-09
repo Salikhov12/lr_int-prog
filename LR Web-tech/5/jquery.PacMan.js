@@ -91,7 +91,7 @@
 			maxL = $("div#game img").last().position()['left'];
 			maxT = $("div#game img").last().position()['top'];
 			
-			$("div#game")[0].style.width=maxL+32;
+			$("div#game")[0].style.width=800;
 			
 			//$("<input type='button' value='STOP' id='stopgame'>").appendTo("div#game"); // Кнопка остановки персонажей
 			$("<p id='beginText' class='message' style='top:"+(-maxT/2)+";left:"+((maxL+32-290)/2)+";'>Нажмите 🢁, 🢂, 🢃 или 🢀, чтобы начать</p>").appendTo("div#game");
